@@ -1,16 +1,17 @@
 {{> header}}
-<main>
-  <h1>Welcome</h1>
+<main class="profile">
   <div class="sidebar">
-    <h3>Hello, User</h3>
     <img src="../public/anonymousavatar.webp" alt="Avatar" class="profile-photo"/>
+    <h3>Hello, User</h3>
     <a href="#">Currently Reading</a>
     <a href="#">Want to Read</a>
     <a href="#">Read</a>
   </div>
-  <p>This is where your profile will be. You should only be able to see this page if logged in.</p>
-  
-  <p>Currently, you are {{#unless isLoggedIn}} NOT {{/unless}} logged in.
-  Use the header above to {{#if isLoggedIn}} logout{{else}} login or create an account{{/if}}.</p>
+  <div class="profile-content">
+    <h1>Welcome</h1>
+    <p>This is where your profile will be. You should only be able to see this page if logged in.</p>
+    <p>Currently, you are {{#unless isLoggedIn}} NOT {{/unless}} logged in.
+    Use the header above to {{#if isLoggedIn}} logout{{else}} login or create an account{{/if}}.</p>
+  </div>
 </main>
 {{> footer}}
