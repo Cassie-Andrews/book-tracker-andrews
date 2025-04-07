@@ -1,4 +1,4 @@
-USE mysql_project_db;
+USE book_tracker;
 
 CREATE TABLE users (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
