@@ -17,14 +17,14 @@
 .syne-<uniquifier> {
   font-family: "Syne", sans-serif;
   font-optical-sizing: auto;
-  font-weight: <weight>;
+  font-weight: 400;
   font-style: normal;
 }
 */
 
 body {
   background-color: var(--dark);
-  color: var(--lightest);
+  color: var(--darkest);
   font-size: var(--font-size);
   font-family: "Syne", sans-serif;
   font-weight: 400;
@@ -35,6 +35,14 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+.nav-link {
+  color: var(--light);
+}
+
+.nav-link:hover {
+  color: var(--primary);
 }
 
 main {
@@ -63,7 +71,7 @@ h3 {
 }
 
 a {
-  color: var(--lighter);
+  color: var(--primary);
   transition: color 200ms;
 }
 a:hover,
@@ -74,15 +82,16 @@ a:focus {
 button.btn {
   border: var(--lightest);
   border-radius: 4px;
-  background-color: var(--lighter);
+  background-color: var(--darkest);
   padding: calc(var(--space) * 0.75) calc(var(--space) * 2);
   cursor: pointer;
   transition: background-color 200ms;
+  color: var(--lighter);
 }
 button.btn-text {
   border: none;
   background-color: transparent;
-  color: var(--lighter);
+  color: var(--lightest);
   transition: 200ms;
   cursor: pointer;
 }
@@ -90,6 +99,7 @@ button.btn-text {
 button.btn:hover,
 button.btn:focus {
   background-color: var(--light);
+  color: var(--darkest)
 }
 button.btn-text:hover,
 button.btn-text:focus {
@@ -130,7 +140,7 @@ header .site-logo {
 }
 
 .login-form .login-error {
-  color: var(--lighter);
+  color: var(--primary);
 }
 
 .login-form input {
