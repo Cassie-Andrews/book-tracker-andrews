@@ -1,24 +1,37 @@
 :root {
-  --black: #020303;
-  --dark-grey: #171c1c;
-  --light-grey: #a7b9b7;
-  --primary: #5cc1bb;
-  --primary-dark: #41aaa3;
-  --secondary: hsl(15deg 100% 62%);
-  --secondary-light: hsl(15deg 100% 70%);
-  --text-color: #f5fffe;
+  --darkest: #0a2b23;
+  --darker: #2a453f;
+  --dark: #3a695d;
+  --primary: #4a8273;
+  --light: #b8d7cc;
+  --light: #b8d7cc;
+  --lighter: #f4f9f7;
+  --lightest: #ffffff;
   --space: 16px;
   --font-size: 18px;
 }
 
+/* <weight>: Use a value from 400 to 800
+<uniquifier>: Use a unique and descriptive class name
+
+.syne-<uniquifier> {
+  font-family: "Syne", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+*/
+
 body {
-  background-color: var(--primary-dark);
-  color: var(--text-color);
+  background-color: var(--dark);
+  color: var(--lightest);
   font-size: var(--font-size);
+  font-family: "Syne", sans-serif;
+  font-weight: 400;
+  font-optical-sizing: auto;
   line-height: 1.5;
   padding: 0;
   margin: 0;
-  font-family: helvetica;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -29,7 +42,7 @@ main {
   width: 100%;
   max-width: 960px;
   margin: 0 auto;
-  background-color: var(--black);
+  background-color: var(--lighter);
   padding: var(--space) calc(var(--space) * 3);
   text-align: center;
 }
@@ -50,18 +63,18 @@ h3 {
 }
 
 a {
-  color: var(--secondary-light);
+  color: var(--lighter);
   transition: color 200ms;
 }
 a:hover,
 a:focus {
-  color: var(--secondary);
+  color: var(--light);
 }
 
 button.btn {
-  border: var(--text-color);
+  border: var(--lightest);
   border-radius: 4px;
-  background-color: var(--secondary-light);
+  background-color: var(--lighter);
   padding: calc(var(--space) * 0.75) calc(var(--space) * 2);
   cursor: pointer;
   transition: background-color 200ms;
@@ -69,25 +82,25 @@ button.btn {
 button.btn-text {
   border: none;
   background-color: transparent;
-  color: var(--secondary-light);
+  color: var(--lighter);
   transition: 200ms;
   cursor: pointer;
 }
 
 button.btn:hover,
 button.btn:focus {
-  background-color: var(--secondary);
+  background-color: var(--light);
 }
 button.btn-text:hover,
 button.btn-text:focus {
-  color: var(--secondary);
+  color: var(--light);
 }
 header {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--black);
+  background-color: var(--darkest);
   margin-bottom: calc(var(--space) * 6);
 }
 header a {
@@ -101,7 +114,7 @@ header .site-logo {
 
 .site-logo {
   text-align: center;
-  color: var(--text-color);
+  color: var(--lightest);
   text-decoration: none;
   margin: calc(var(--space) * 4) auto;
   display: block;
@@ -117,7 +130,7 @@ header .site-logo {
 }
 
 .login-form .login-error {
-  color: var(--secondary-light);
+  color: var(--lighter);
 }
 
 .login-form input {
