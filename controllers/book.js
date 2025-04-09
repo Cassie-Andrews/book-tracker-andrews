@@ -1,17 +1,24 @@
 const {book} = require('../models')
 const fetch = require('node-fetch')
 
-async function getBooks(req, res) {
+async function searchBooks(req, res) {
     try {
-        const books = await book.getAllBooks()
+        const {query} = req.query
+        
+        if (!query) {
+            return res.redirect('/')
+        }
+        
+        const books = await book.searchBooks(query)
+        
         res.render("index", {books})
-        const data = await response.json()
+        
     } catch (err) {
         res.status(500).send(err.message)
     }
 }
 
-module.exports = {getBooks}
+module.exports = {searchBooks}
 
 /*
 data.docs.forEach((book) => {

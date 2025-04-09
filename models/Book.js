@@ -1,29 +1,21 @@
 const bcrypt = require("bcrypt");
 const db = require("../config/connection");
 
-async function findByTitle(title) {
-  const [[book]] = await db.query(
-    `SELECT * FROM books WHERE title=?`,
-    title
-  );
-  return title;
+
+const Book = {
+  // get all books
+  getAllBooks: () => {
+    return db.query('SELECT * FROM books')
+      .then(([rows]) => rows)
+  },
+
+  //search by author or title
+  searchBooks: (query) => {
+    return db.query(
+      'SELECT * FROM books WHERE title LIKE ? OR author LIKE ?'
+      [`${query}`, `${query}`]
+    ) .then(([rows]) => rows)
+  }
 }
-/*
-async function create(username, password) {
-  const hashedPass = await bcrypt.hash(password, 10);
 
-  await db.query(`INSERT INTO users (username, password) VALUES (?, ?)`, [
-    username,
-    hashedPass,
-  ]);
-
-  return findByUsername(username);
-}
-*/
-// hashes the password before it's stored in mongo
-
-module.exports = {
-  //create,
-  //checkPassword,
-  findByTitle,
-};
+module.exports = { Book }

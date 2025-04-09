@@ -83,13 +83,15 @@ button.btn {
   border: var(--lightest);
   border-radius: 4px;
   background-color: var(--darkest);
-  padding: calc(var(--space) * 0.75) calc(var(--space) * 2);
+  padding: calc(var(--space) * 0.75) /*calc(var(--space) * 2)*/;
   cursor: pointer;
   transition: background-color 200ms;
   color: var(--lighter);
+  max-width: 90px;
 }
 button.btn-text {
   border: none;
+  text-align: center;
   background-color: transparent;
   color: var(--lightest);
   transition: 200ms;
@@ -184,9 +186,21 @@ header .site-logo {
   padding: var(--space) calc(var(--space) * 2);
 }
 
+/* PROFILE - book search */
+form.search {
+  display: flex;
+  align-content: space-between;
+}
+
+form.search > input {
+ min-width: 220px;
+ margin-right: var(--space);
+ padding: calc(var(--space) * .5) var(--space);
+}
 
 
 
+/* FOOTER */
 footer {
   text-align: center;
   padding: 10px;
