@@ -1,6 +1,19 @@
 {{> header}}
-<main>
-  <h1>This is the home page!</h1>
+<main class="profile">
+    <div class="sidebar">
+    <img src='/images/anonymousavatar.webp' alt="Avatar" class="profile-photo"/>
+    <h3>Hello, User</h3>
+    <a href="#">Currently Reading</a>
+    <a href="#">Want to Read</a>
+    <a href="#">Read</a>
+  </div>
+  <div class="profile-content">
+    <h1>Welcome</h1>
+    <p>This is where your profile will be. You should only be able to see this page if logged in.</p>
+    <form class="search" action="/search" method="GET">
+      <input type="text" name="query" placeholder="Search for a book by author or title..." required>
+      <button class="btn" type="submit">Search</button>
+    </form>
   <p>Currently, you are {{#unless isLoggedIn}} NOT {{/unless}} logged in.</p>
   <p>You should {{#unless isLoggedIn}}NOT{{/unless}} be able to access <a href="/private">this page</a>.</p>
   <p>Use the header above to {{#if isLoggedIn}} logout{{else}} login or create an account{{/if}}.</p>
