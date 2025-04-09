@@ -1,11 +1,11 @@
 const router = require("express").Router();
-const { authController, bookController } = require("../controllers");
+const { auth, book } = require("../controllers");
 const checkAuth = require("../middleware/auth");
 
 // home/index route
 router.get("/", async ({ session: { isLoggedIn } }, res) => {
   try {
-    const books = await bookController.getBooks();
+    const books = await book.getBooks();
     res.render("index", { books, isLoggedIn });
   } catch(err) {
     res.status(500).send("Error fetching books: " + err.message);
@@ -41,7 +41,7 @@ router.get("/search", async (req, res) => {
   }
   
   try {
-    const books = await bookController.searchBooks(query)
+    const books = await book.searchBooks(query)
     res.render("index", { books, isLoggedIn: req.session.isLoggedIn });
   } catch (err) {
     res.status(500).send("Error fetching search results: " + err.message)

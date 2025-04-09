@@ -1,10 +1,10 @@
-const { book } = require('../models')
-const fetch = require('node-fetch')
-const { fetchOpenLibraryData } = require('../api/bookApi')
+import { findAll } from '../models/book'
+import fetch from 'node-fetch'
+import { fetchOpenLibraryData } from '../api/bookApi'
 
 // get all books
 async function getBooks() {
-    return await book.findAll()
+    return await findAll()
 }
 
 //search and insert books from API
@@ -23,4 +23,4 @@ async function searchAndInsertBooks(query) {
     return inserted
 }
 
-module.exports = { getBooks, searchAndInsertBooks }
+export default { getBooks, searchAndInsertBooks }
