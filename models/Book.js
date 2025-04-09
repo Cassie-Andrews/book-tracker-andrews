@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const db = require("../config/connection");
 
 
-const Book = {
+const book = {
   // get all books
   getAllBooks: () => {
     return db.query('SELECT * FROM books')
@@ -18,4 +18,4 @@ const Book = {
   }
 }
 
-module.exports = { Book }
+module.exports = {book}

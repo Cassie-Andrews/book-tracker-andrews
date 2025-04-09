@@ -2,7 +2,7 @@ const router = require("express").Router();
 const {authController, bookController} = require("../controllers");
 const checkAuth = require("../middleware/auth");
 
-/* book list -> add this to the protected page?
+/* book list -> add this to the protected page? or switch profile content from protected page to index
 
 router.get("/", checkAuth, async (req, res) => {
   try {
