@@ -2,7 +2,8 @@ const router = require("express").Router();
 const {authController, bookController} = require("../controllers");
 const checkAuth = require("../middleware/auth");
 
-// book list
+/* book list -> add this to the protected page?
+
 router.get("/", checkAuth, async (req, res) => {
   try {
     const books = await bookController.getBooks()
@@ -11,11 +12,13 @@ router.get("/", checkAuth, async (req, res) => {
     res.status(500).send(err.message)
   } 
 });
+*/
 
 
 router.get("/", ({ session: { isLoggedIn } }, res) => {
   res.render("index", { isLoggedIn });
 });
+
 
 // login
 router.get("/login", async (req, res) => {
