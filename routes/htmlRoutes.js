@@ -1,22 +1,15 @@
 const router = require("express").Router();
-const {authController, bookController} = require("../controllers");
+const { authController, bookController } = require("../controllers");
 const checkAuth = require("../middleware/auth");
 
-/* book list -> add this to the protected page? or switch profile content from protected page to index
-
-router.get("/", checkAuth, async (req, res) => {
+// home/index route
+router.get("/", async ({ session: { isLoggedIn } }, res) => {
   try {
-    const books = await bookController.getBooks()
-    res.render("index", { books, isLoggedIn: req.session.isLoggedIn });
-  } catch (err) {
-    res.status(500).send(err.message)
-  } 
-});
-*/
-
-
-router.get("/", ({ session: { isLoggedIn } }, res) => {
-  res.render("index", { isLoggedIn });
+    const books = await bookController.getBooks();
+    res.render("index", { books, isLoggedIn });
+  } catch(err) {
+    res.status(500).send("Error fetching books: " + err.message);
+  }
 });
 
 
@@ -37,5 +30,23 @@ router.get("/signup", async (req, res) => {
 router.get("/private", checkAuth, ({ session: { isLoggedIn } }, res) => {
   res.render("protected", { isLoggedIn });
 });
+
+
+// search books
+router.get("/search", async (req, res) => {
+  const {query} = req.query
+  
+  if (!query) {
+    return res.redirect("/")
+  }
+  
+  try {
+    const books = await bookController.searchBooks(query)
+    res.render("index", { books, isLoggedIn: req.session.isLoggedIn });
+  } catch (err) {
+    res.status(500).send("Error fetching search results: " + err.message)
+  } 
+});
+
 
 module.exports = router;

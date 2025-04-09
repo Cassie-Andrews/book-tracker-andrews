@@ -1,27 +1,26 @@
-const {book} = require('../models')
+const { book } = require('../models')
 const fetch = require('node-fetch')
-const {getOpenLibraryData} = require('../api/bookApi')
+const { fetchOpenLibraryData } = require('../api/bookApi')
 
-async function searchBooks(req, res) {
-    const {query} = req.query
-    
-    if (!query) {
-        return res.redirect('/')
-    }
-
-    try {    
-        const books = await getOpenLibraryData(query)
-        res.render("index", {books, isLoggedIn: req.session.isLoggedIn})
-    } catch (err) {
-        res.status(500).send("Error fetching books: " + err.message)
-    }
+// get all books
+async function getBooks() {
+    return await book.findAll()
 }
 
-module.exports = {searchBooks}
+//search and insert books from API
+async function searchAndInsertBooks(query) {
+    const booksFromAPI = await fetchOpenLibraryData(query)
+    const inserted = []
 
-/*
-data.docs.forEach((book) => {
-    console.log(`Title: ${book.title}`)
-    console.log(`Author(s): ${book.author_name ? book.author_name.join(', ') : 'Unknown'}`)
-    console.log(`Genre(s): ${book.subject}`)
-*/
+    //loop through each book
+    for (const book of booksFromAPI) {
+        const insertID = await book.insertBook(book)
+        if (insertId) {
+            inserted.push({...book, id: insertID})
+        }
+    }
+    
+    return inserted
+}
+
+module.exports = { getBooks, searchAndInsertBooks }
