@@ -2,10 +2,10 @@ const bcrypt = require("bcrypt");
 const db = require("../config/connection");
 
 // find all books
-const book = {
+const bookModel = {
   async findAll() {
-    const [rows] = await db.query('SELECT * FROM books')
-    return rows
+    const [rows] = await db.query('SELECT * FROM books');
+    return rows;
   },
 
   // insert book
@@ -13,10 +13,10 @@ const book = {
     const query = `
       INSERT INTO books (title, author, genre, cover) 
       VALUES (?, ?, ?, ?)
-    `
-    const [result] = await db.query(query, [title, author, genre, cover])
-    return result.insertId
+    `;
+    const [result] = await db.query(query, [title, author, genre, cover]);
+    return result.insertId;
   }
 }
 
-module.exports = { book }
+module.exports = bookModel
