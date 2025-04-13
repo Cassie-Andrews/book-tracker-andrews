@@ -16,8 +16,8 @@ router.get("/search", async (req, res) => {
     if(!query) return res.status(400).send("No query")
     
     try {
-        const inserted = await searchAndInsertBooks(query)
-        res.json({ message: "Books added", count: inserted.length, inserted })
+        const books = await searchAndInsertBooks(query)
+        res.json(books)
     } catch(err) {
         res.status(500).send(err.message)
     }

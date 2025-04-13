@@ -1,12 +1,13 @@
 const router = require("express").Router();
 const { auth, book } = require("../controllers");
+const { searchAndInsertBooks } = require("../controllers/book")
 const checkAuth = require("../middleware/auth");
 
 // loads homepage, index.handlebars
 router.get("/", async ({ session: { isLoggedIn } }, res) => {
   // when logged in, gets all books then displays them
   try {
-    const books = await book.getBooks();
+    const books = await book.searchAndInsertBooks();
     res.render("index", { books, isLoggedIn });
   } catch(err) {
     res.status(500).send("Error fetching books: " + err.message);
@@ -40,13 +41,14 @@ router.get("/private", checkAuth, ({ session: { isLoggedIn } }, res) => {
 // search books
 router.get("/search", async (req, res) => {
   const {query} = req.query
-  
+  // redirects home if query is missing
   if (!query) {
     return res.redirect("/")
   }
-  
+  // handle search if there is a query and user is logged in
   try {
-    const books = await book.searchBooks(query)
+    const books = await searchAndInsertBooks(query)
+    // renders index page with results
     res.render("index", { books, isLoggedIn: req.session.isLoggedIn });
   } catch (err) {
     res.status(500).send("Error fetching search results: " + err.message)
