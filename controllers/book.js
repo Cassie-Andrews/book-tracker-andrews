@@ -2,12 +2,6 @@ const bookModel = require('../models/bookModel')
 const fetch = require('node-fetch')
 const { fetchOpenLibraryData } = require('../api/bookApi')
 
-/*
-// get all books
-async function getBooks() {
-    return await book.findAll()
-}
-*/
 
 //search and insert books from API
 async function searchAndInsertBooks(query) {
@@ -21,7 +15,7 @@ async function searchAndInsertBooks(query) {
         const cover = book.cover || null;
 
         try {
-            const insertID = await bookModel.insertBook(title, author, genre, cover)
+            const insertID = await bookModel.insertBook(title, author, cover)
 
             if (insertID) {
                 inserted.push({...book, id: insertID})
