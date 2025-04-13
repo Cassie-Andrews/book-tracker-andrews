@@ -18,7 +18,6 @@ async function searchAndInsertBooks(query) {
     for (const book of booksFromAPI) {
         const title = book.title || "Untitled";
         const author = book.author || "Unknown";
-        const genre = book.genre || "Uncategorized";
         const cover = book.cover || null;
 
         try {
