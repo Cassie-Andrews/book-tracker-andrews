@@ -2,8 +2,9 @@ const router = require("express").Router();
 const { auth, book } = require("../controllers");
 const checkAuth = require("../middleware/auth");
 
-// home/index route
+// loads homepage, index.handlebars
 router.get("/", async ({ session: { isLoggedIn } }, res) => {
+  // when logged in, gets all books then displays them
   try {
     const books = await book.getBooks();
     res.render("index", { books, isLoggedIn });
@@ -13,22 +14,26 @@ router.get("/", async ({ session: { isLoggedIn } }, res) => {
 });
 
 
-// login
+// renders login page
 router.get("/login", async (req, res) => {
-  if (req.session.isLoggedIn) return res.redirect("/");
+  // if user is already logged in, redirect to profile
+  if (req.session.isLoggedIn) return res.redirect("/private");
+  // error handling
   res.render("login", { error: req.query.error });
 });
 
-// signup
+
+// renders signup page
 router.get("/signup", async (req, res) => {
   if (req.session.isLoggedIn) return res.redirect("/");
+  // error handling
   res.render("signup", { error: req.query.error });
 });
 
 
-// private route
+// private route that renders private.handlebars
 router.get("/private", checkAuth, ({ session: { isLoggedIn } }, res) => {
-  res.render("protected", { isLoggedIn });
+  res.render("private", { isLoggedIn });
 });
 
 

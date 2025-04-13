@@ -161,8 +161,8 @@ header .site-logo {
 }
 
 .profile-photo {
-  width: 180px;
-  height: 180px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--darkest);

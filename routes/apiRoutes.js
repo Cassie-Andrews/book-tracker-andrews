@@ -8,8 +8,10 @@ const checkAuth = require("../middleware/auth");
 router.post("/login", controllers.auth.login);
 router.get("/logout", controllers.auth.logout);
 router.post("/signup", controllers.user.create);
+
+
 // get books
-router.get("/fetch-books", async (req, res) => {
+router.get("/search", async (req, res) => {
     const { query } = req.query
     if(!query) return res.status(400).send("No query")
     

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "config": {
-    "DB_NAME": "mysql_project_db"
+    "DB_NAME": "book_tracker"
   },
   "scripts": {
     "start": "node index.js",
