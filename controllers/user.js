@@ -1,4 +1,4 @@
-const { User } = require("../models/indexModel");
+const userModel = require("../models/userModel");
 
 async function create(req, res) {
   try {
@@ -7,7 +7,7 @@ async function create(req, res) {
     if (!username || !password)
       return res.redirect("/signup?error=must include username and password");
 
-    const user = await User.create(username, password);
+    const user = await userModel.create(username, password);
 
     if (!user) return res.redirect("/signup?error=error creating new user");
 

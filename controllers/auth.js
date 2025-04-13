@@ -1,4 +1,6 @@
-const { User } = require("../models/indexModel");
+const indexModel = require("../models/indexModel");
+const userModel = require("../models/userModel");
+
 
 async function login(req, res) {
   try {
@@ -7,12 +9,12 @@ async function login(req, res) {
     if (!username || !password)
       return res.redirect("/login?error=must include username and password");
 
-    const user = await User.findByUsername(username);
+    const user = await userModel.findByUsername(username);
 
     if (!user)
       return res.redirect("/login?error=username or password is incorrect");
 
-    const passwordMatches = await User.checkPassword(password, user.password);
+    const passwordMatches = await userModel.checkPassword(password, user.password);
 
     if (!passwordMatches)
       return res.redirect("/login?error=username or password is incorrect");

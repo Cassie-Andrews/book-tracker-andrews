@@ -15,11 +15,25 @@
       <button class="btn" type="submit">Search</button>
     </form>
 
+  {{#if books.length}}
     <div class="search-results">
-      <p>
-        Display search results here.
-      </p>
+      {{#each books}}
+      <div class="book-card">
+        <p>{{this.title}}</p>
+        <p>Author: {{this.author}}</p>
+        {{#if this.cover}}
+          <img src="{{this.cover}}" alt="{{this.title}}" />
+        {{else}}
+          <p>No cover available</p>
+        {{/if}}
+      </div>
+      {{/each}}
     </div>
+  {{else}}
+    <div class="search-results">
+      <p>No reults found.</p>
+    </div>
+  {{/if}}
 
     <p>Currently, you are {{#unless isLoggedIn}} NOT {{/unless}} logged in.
     Use the header above to {{#if isLoggedIn}} logout{{else}} login or create an account{{/if}}.</p>

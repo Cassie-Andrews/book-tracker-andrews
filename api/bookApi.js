@@ -21,8 +21,8 @@ async function fetchOpenLibraryData(query) {
                 // Use the olid (Open Library ID) for authors and books to fetch covers by olid, e.g. https://covers.openlibrary.org/a/olid/OL23919A-M.jpg
         }))
     } catch(err) {
-        console.log(err)
-        res.status(500).send(err.message)
+        console.error("Error fetching data from API", err.message);
+        throw err;
     }
 }
 

@@ -1,4 +1,4 @@
 const userModel = require("./userModel");
+const bookModel = require("./bookModel");
 
-module.exports = userModel;
-
+module.exports = { userModel, bookModel }
