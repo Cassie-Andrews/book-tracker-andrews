@@ -9,12 +9,12 @@ const books = {
   },
 
   // insert book
-  async insertBook(title, author, genre, cover) {
+  async insertBook(title, author, cover) {
     const query = `
-      INSERT INTO books (title, author, genre, cover) 
-      VALUES (?, ?, ?, ?)
+      INSERT INTO books (title, author, cover) 
+      VALUES (?, ?, ?)
     `;
-    const [result] = await db.query(query, [title, author, genre, cover]);
+    const [result] = await db.query(query, [title, author, cover]);
     return result.insertID;
   }
 }
