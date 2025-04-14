@@ -1,26 +1,15 @@
 {{> header}}
-<main class="profile">
-    <div class="sidebar">
-    {{#if isLoggedIn}}
-    <img src='/images/anonymousavatar.webp' alt="Avatar" class="profile-photo"/>
-    <h3>Hello, Username!</h3>
-    <a href="#">Currently Reading</a>
-    <a href="#">Want to Read</a>
-    <a href="#">Read</a>
-    {{else}}
-    <p>Please log in or create an account.</p>
-    {{/if}}
+<main>
+  <div>
+    <h1>Welcome to Book Tracker</h1>
+    <h2>Your personal reading companion.</h2>
+    <p>Build your digital bookcase, find new books to read, and track your reading goals all in one place.</p>
   </div>
-
-  <div class="profile-content">
-    <h1>Welcome</h1>
-    <p>This is where your homepage will be. You should only be able to see this page if logged in.</p>
-    <form class="search" action="/search" method="GET">
-      <input type="text" name="query" placeholder="Search for a book by author or title..." required>
-      <button class="btn" type="submit">Search</button>
-    </form>
-  <p>Currently, you are {{#unless isLoggedIn}} NOT {{/unless}} logged in.</p>
-  <p>You should {{#unless isLoggedIn}}NOT{{/unless}} be able to access <a href="/private">this page</a>.</p>
-  <p>Use the header above to {{#if isLoggedIn}} logout{{else}} login or create an account{{/if}}.</p>
+  <div>
+    <h3>Dev helpers</h3>
+    <p>You are currently {{#unless isLoggedIn}} NOT {{/unless}} logged in.</p>
+    <p>You should {{#unless isLoggedIn}}NOT{{/unless}} be able to access <a href="/private">your profile</a>.</p>
+    <p>Use the header above to {{#if isLoggedIn}} logout{{else}} login or create an account{{/if}}.</p>
+  </div>
 </main>
 {{> footer}}

@@ -7,34 +7,53 @@
     <a href="#">Want to Read</a>
     <a href="#">Read</a>
   </div>
+
   <div class="profile-content">
     <h1>Welcome</h1>
     <p>This is where your profile will be. You should only be able to see this page if logged in.</p>
+
+    <!-- SEARCH FORM-->
     <form class="search" action="/search" method="GET">
       <input type="text" name="query" placeholder="Search for a book by author or title..." required>
       <button class="btn" type="submit">Search</button>
     </form>
 
-  {{#if books.length}}
-    <div class="search-results">
-      {{#each books}}
-      <div class="book-card">
-        <p>{{this.title}}</p>
-        <p>Author: {{this.author}}</p>
-        {{#if this.cover}}
-          <img src="{{this.cover}}" alt="{{this.title}}" />
-        {{else}}
-          <p>No cover available</p>
-        {{/if}}
+    <!-- SEARCH RESULTS -->
+    {{#if books.length}}
+      <div class="search-results">
+        {{#each books}}
+        <div class="book-card">
+          <p>{{this.title}}</p>
+          <p>Author: {{this.author}}</p>
+          {{#if this.cover}}
+            <img src="{{this.cover}}" alt="{{this.title}}" />
+          {{else}}
+            <p>No cover available</p>
+          {{/if}}
+        </div>
+        {{/each}}
       </div>
-      {{/each}}
+    {{else}}
+        <p>No reults found.</p>
     </div>
-  {{else}}
-      <p>No reults found.</p>
-  {{/if}}
+    {{/if}}
+  
+  
+    <!-- BOOKSHELVES -->
+    <div class="bookshelves">
+      <div class="currently-reading-bookself">
 
-    <p>Currently, you are {{#unless isLoggedIn}} NOT {{/unless}} logged in.
-    Use the header above to {{#if isLoggedIn}} logout{{else}} login or create an account{{/if}}.</p>
+      </div>
+
+      <div class="want-to-read-bookself">
+
+      </div>
+
+      <div class="read-bookself">
+
+      </div>
+    </div>
+    
   </div>
 </main>
 {{> footer}}
