@@ -59,17 +59,62 @@
   
     <!-- BOOKSHELVES -->
     <div class="bookshelves">
-      <div class="currently-reading-bookself">
-
+      {{#if currently_reading.length}}
+      <div class="shelf">
+        <h2>Currently Reading</h2>
+        <ul>
+          {{#each want_to_read}}
+          <li class="book-card">
+            <h3>{{this.title}}</h3>
+            <p>Author: {{this.author}}</p>
+              {{#if this.cover}}
+                <img src="{{this.cover}}" alt="{{this.title}}" />
+              {{else}}
+                <p>No cover available.</p>
+              {{/if}}
+          </li>
+          {{/each}}
+        </ul>
       </div>
+      {{/if}}
 
-      <div class="want-to-read-bookself">
-
+      {{#if want_to_read.length}}
+      <div class="shelf">
+        <h2>Want to Read</h2>
+        <ul>
+          {{#each want_to_read}}
+          <li class="book-card">
+            <h3>{{this.title}}</h3>
+            <p>Author: {{this.author}}</p>
+              {{#if this.cover}}
+                <img src="{{this.cover}}" alt="{{this.title}}" />
+              {{else}}
+                <p>No cover available.</p>
+              {{/if}}
+          </li>
+          {{/each}}
+        </ul>
       </div>
+      {{/if}}
 
-      <div class="read-bookself">
-
+      {{#if read.length}}
+      <div class="shelf">
+        <h2>Read</h2>
+        <ul>
+          {{#each want_to_read}}
+          <li class="book-card">
+            <h3>{{this.title}}</h3>
+            <p>Author: {{this.author}}</p>
+              {{#if this.cover}}
+                <img src="{{this.cover}}" alt="{{this.title}}" />
+              {{else}}
+                <p>No cover available.</p>
+              {{/if}}
+          </li>
+          {{/each}}
+        </ul>
       </div>
+      {{/if}}
     </div>
 
   </div>

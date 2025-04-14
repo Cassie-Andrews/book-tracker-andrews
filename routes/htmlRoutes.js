@@ -4,6 +4,11 @@ const { searchAndInsertBooks } = require("../controllers/book")
 const userBookController = require("../controllers/userBook")
 const checkAuth = require("../middleware/auth");
 
+
+
+
+/* INDEX aka HOMEPAGE ROUTE */
+
 // loads homepage, index.handlebars
 router.get("/", async ({ session: { isLoggedIn } }, res) => {
   // when logged in, gets all books then displays them
@@ -16,6 +21,10 @@ router.get("/", async ({ session: { isLoggedIn } }, res) => {
 });
 
 
+
+
+/* LOGIN ROUTE */
+
 // renders login page
 router.get("/login", async (req, res) => {
   // if user is already logged in, redirect to profile
@@ -24,6 +33,10 @@ router.get("/login", async (req, res) => {
   res.render("login", { error: req.query.error });
 });
 
+
+
+
+/* SIGNUP ROUTE */
 
 // renders signup page
 router.get("/signup", async (req, res) => {
@@ -35,7 +48,7 @@ router.get("/signup", async (req, res) => {
 
 
 
-
+/* PRIVATE ROUTE */
 
 // private route that renders private.handlebars // display bookselves
 router.get("/private", checkAuth, async (req, res) => {
@@ -47,10 +60,14 @@ router.get("/private", checkAuth, async (req, res) => {
     let searchResults = [];
     // get book data from user_books table
     if (query) {
+      console.log("Searching for:", query);
       searchResults = await searchAndInsertBooks(query);
+      console.log("Search results:", searchResults);
     }
 
     const bookshelves = await userBookController.getBooksByShelf(userId);
+    console.log("Bookshelves for ", userId, "include: ", bookshelves)
+
     // render private page w/ book results
     res.render("private", { 
         isLoggedIn,
@@ -61,7 +78,7 @@ router.get("/private", checkAuth, async (req, res) => {
 
   } catch(err) {
       // error handling
-      console.error("Error:", err.message)
+      console.error("Error loading /private: ", err.message)
       res.status(500).send("Error loading /private")
   }
 });
@@ -69,14 +86,11 @@ router.get("/private", checkAuth, async (req, res) => {
 
 
 
-
-
-
-
+/* SEARCH ROUTE 
 
 // search books
-router.get("/search", async (req, res) => {
-  const {query} = req.query
+router.get("/search", checkAuth, async (req, res) => {
+  const { query } = req.query
   // redirects home if query is missing
   if (!query) {
     return res.redirect("/private?error=No query provided")
@@ -91,6 +105,7 @@ router.get("/search", async (req, res) => {
   } 
 });
 
+*/
 
 
 
