@@ -33,10 +33,45 @@ router.get("/signup", async (req, res) => {
 });
 
 
-// private route that renders private.handlebars
-router.get("/private", checkAuth, ({ session: { isLoggedIn } }, res) => {
-  res.render("private", { isLoggedIn });
+
+
+
+
+// private route that renders private.handlebars // display bookselves
+router.get("/private", checkAuth, async (req, res) => {
+  const { query } = req.query;
+  const userId = req.session.userId;
+  const isLoggedIn = req.session.isLoggedIn;
+
+  try {
+    let searchResults = [];
+    // get book data from user_books table
+    if (query) {
+      searchResults = await searchAndInsertBooks(query);
+    }
+
+    const bookshelves = await userBookController.getBooksByShelf(userId);
+    // render private page w/ book results
+    res.render("private", { 
+        isLoggedIn,
+        query,
+        books: searchResults,
+        ...bookshelves
+     });
+
+  } catch(err) {
+      // error handling
+      console.error("Error:", err.message)
+      res.status(500).send("Error loading /private")
+  }
 });
+
+
+
+
+
+
+
 
 
 // search books
@@ -56,23 +91,7 @@ router.get("/search", async (req, res) => {
   } 
 });
 
-// display bookselves
-router.get("/private", checkAuth, async (req, res) => {
-  const userId = req.session.userId;
-  try {
-      // get book data from user_books table
-      const bookshelves = await userBookController.getBooksByShelf(userId);
-      // render private page w/ book results
-      res.render("private", { 
-          isLoggedIn: true,
-          ...bookshelves
-       });
-  } catch(err) {
-      // error handling
-      console.error("Error loading bookshelves:", err.message)
-      res.status(500).send("Error loading bookshelves.")
-  }
-})
+
 
 
 module.exports = router;
