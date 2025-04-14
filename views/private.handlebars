@@ -24,8 +24,8 @@
     </form>
 
     <!-- SEARCH RESULTS DISPLAY -->
-    {{#if books.length}}
-      <div class="search-results">
+    <div class="search-results">
+      {{#if books.length}}
         <h2>Results:</h2>
         <ul>
           {{#each books}}
@@ -37,8 +37,8 @@
               {{else}}
                 <p>No cover available.</p>
               {{/if}}
-
-              <form class="bookshelf-form" action="" method="POST">
+              <!-- BOOKSHELF SORTING FORM -->
+              <form class="bookshelf-form" action="/private" method="POST">
                 <input type="radio" name="book_id" value="{{this.id}}" />
                 <select name="bookshelf">
                   <option value="want_to_read">Want to read</option>
@@ -51,11 +51,10 @@
           {{/each}}
         </ul>
       </div>
-    {{else}}
-        <p>No reults found.</p>
+      {{else if query}}
+          <p>No results found for "{{query}}".</p>
+      {{/if}}
     </div>
-    {{/if}}
-  
   
     <!-- BOOKSHELVES -->
     <div class="bookshelves">
