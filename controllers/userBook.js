@@ -18,4 +18,22 @@ async function addToShelf(req, res) {
     }
 }
 
-module.exports = { addToShelf }
+// get books by shelf from user_books
+async function getBooksByShelf(userId) {
+    const [rows] = await db.query(
+        `SELECT books.*, user_books.bookshelf
+        FROM user_books
+        JOIN books ON user_books.book_id = books.id
+        WHERE user_books.user_id = ?`,
+        [userId]
+    );
+    // filter by bookshelf
+    //('want_to_read', 'reading', 'read')
+    return {
+        wantToRead: rows.filter(b => b.bookshelf === 'want_to_read'),
+        currentlyReading: rows.filter(b => b.bookshelf === 'reading'),
+        read: rows.filter(b => b.bookshelf === 'read')
+    };    
+}
+
+module.exports = { addToShelf, getBooksByShelf }

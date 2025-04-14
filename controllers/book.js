@@ -29,7 +29,7 @@ async function searchAndInsertBooks(query) {
     return inserted
 }
 
-
+/*
 //insert books from user_books
 async function getUserBooks() {
     const getUserBooks = 
@@ -55,5 +55,6 @@ async function getUserBooks() {
     
     return inserted
 }
+*/
 
 module.exports = { searchAndInsertBooks }
