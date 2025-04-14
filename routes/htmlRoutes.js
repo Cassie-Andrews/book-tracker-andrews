@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { auth, book } = require("../controllers");
 const { searchAndInsertBooks } = require("../controllers/book")
+const userBookController = require("../controllers/userBook")
 const checkAuth = require("../middleware/auth");
 
 // loads homepage, index.handlebars
@@ -56,20 +57,20 @@ router.get("/search", async (req, res) => {
 });
 
 // display bookselves
-router.get("/search", async (req, res) => {
-  
+router.get("/private", checkAuth, async (req, res) => {
+  const userId = req.session.userId;
   try {
       // get book data from user_books table
-      const userBooks = await fetchOpenLibraryData(query);
+      const bookshelves = await userBookController.getBooksByShelf(userId);
       // render private page w/ book results
       res.render("private", { 
-          isLoggedIn: req.session.isLoggedIn,
-          books
-       })
+          isLoggedIn: true,
+          ...bookshelves
+       });
   } catch(err) {
       // error handling
-      console.log("Error fetching results:", err)
-      res.status(500).send("Error fetching results:" + err.message)
+      console.error("Error loading bookshelves:", err.message)
+      res.status(500).send("Error loading bookshelves.")
   }
 })
 

@@ -37,6 +37,16 @@
               {{else}}
                 <p>No cover available.</p>
               {{/if}}
+
+              <form class="bookshelf-form" action="" method="POST">
+                <input type="radio" name="book_id" value="{{this.id}}" />
+                <select name="bookshelf">
+                  <option value="want_to_read">Want to read</option>
+                  <option value="currently_reading">Currently reading</option>
+                  <option value="read">Read</option>
+                </select>
+                <button class="btn" type="submit">Add to shelf</button>
+              </form>
           </li>
           {{/each}}
         </ul>

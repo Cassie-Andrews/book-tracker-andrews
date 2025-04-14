@@ -34,6 +34,7 @@ router.get("/search", async (req, res) => {
     }
 })
 
+// route to add a book to a shelf
 router.post("/add-to-shelf", checkAuth, userBookController.addToShelf);
 
 
