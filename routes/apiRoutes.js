@@ -23,13 +23,18 @@ router.get("/search", async (req, res) => {
         // get book data from api
         const books = await fetchOpenLibraryData(query);
         // render private page w/ book results
-        res.render("private", { books, isLoggedIn: req.session.isLoggedIn })
+        res.render("private", { 
+            isLoggedIn: req.session.isLoggedIn,
+            books
+         })
     } catch(err) {
         // error handling
         console.log("Error fetching results:", err)
         res.status(500).send("Error fetching results:" + err.message)
     }
 })
+
+router.post("/add-to-shelf", checkAuth, userBookController.addToShelf);
 
 
 module.exports = router;

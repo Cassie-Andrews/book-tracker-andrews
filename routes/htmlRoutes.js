@@ -43,7 +43,7 @@ router.get("/search", async (req, res) => {
   const {query} = req.query
   // redirects home if query is missing
   if (!query) {
-    return res.redirect("/")
+    return res.redirect("/private?error=No query provided")
   }
   // handle search if there is a query and user is logged in
   try {
@@ -54,6 +54,24 @@ router.get("/search", async (req, res) => {
     res.status(500).send("Error fetching search results: " + err.message)
   } 
 });
+
+// display bookselves
+router.get("/search", async (req, res) => {
+  
+  try {
+      // get book data from user_books table
+      const userBooks = await fetchOpenLibraryData(query);
+      // render private page w/ book results
+      res.render("private", { 
+          isLoggedIn: req.session.isLoggedIn,
+          books
+       })
+  } catch(err) {
+      // error handling
+      console.log("Error fetching results:", err)
+      res.status(500).send("Error fetching results:" + err.message)
+  }
+})
 
 
 module.exports = router;

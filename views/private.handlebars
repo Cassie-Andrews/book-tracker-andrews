@@ -12,26 +12,34 @@
     <h1>Welcome</h1>
     <p>This is where your profile will be. You should only be able to see this page if logged in.</p>
 
+    <!-- ERROR DISPLAY -->
+    {{#if error}}
+      <div class="alert alert-danger">{{error}}</div>
+    {{/if}}
+
     <!-- SEARCH FORM-->
     <form class="search" action="/search" method="GET">
       <input type="text" name="query" placeholder="Search for a book by author or title..." required>
       <button class="btn" type="submit">Search</button>
     </form>
 
-    <!-- SEARCH RESULTS -->
+    <!-- SEARCH RESULTS DISPLAY -->
     {{#if books.length}}
       <div class="search-results">
-        {{#each books}}
-        <div class="book-card">
-          <p>{{this.title}}</p>
-          <p>Author: {{this.author}}</p>
-          {{#if this.cover}}
-            <img src="{{this.cover}}" alt="{{this.title}}" />
-          {{else}}
-            <p>No cover available</p>
-          {{/if}}
-        </div>
-        {{/each}}
+        <h2>Results:</h2>
+        <ul>
+          {{#each books}}
+          <li class="book-card">
+            <h3>{{this.title}}</h3>
+            <p>Author: {{this.author}}</p>
+              {{#if this.cover}}
+                <img src="{{this.cover}}" alt="{{this.title}}" />
+              {{else}}
+                <p>No cover available.</p>
+              {{/if}}
+          </li>
+          {{/each}}
+        </ul>
       </div>
     {{else}}
         <p>No reults found.</p>
@@ -53,7 +61,7 @@
 
       </div>
     </div>
-    
+
   </div>
 </main>
 {{> footer}}
