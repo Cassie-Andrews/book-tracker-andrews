@@ -12,10 +12,6 @@
     <h1>Welcome</h1>
     <p>This is where your profile will be. You should only be able to see this page if logged in.</p>
 
-    <!-- ERROR DISPLAY -->
-    {{#if error}}
-      <div class="alert alert-danger">{{error}}</div>
-    {{/if}}
 
     <!-- BOOK SEARCH FORM-->
     <form class="search" action="/private" method="GET">
@@ -30,7 +26,7 @@
         <ul>
           {{#each books}}
           <li class="book-card">
-            <h3>{{this.title}}</h3>
+            <h3 class="book-title">{{this.title}}</h3>
             <p>Author: {{this.author}}</p>
               {{#if this.cover}}
                 <img src="{{this.cover}}" alt="{{this.title}}" />
@@ -38,9 +34,8 @@
                 <p>No cover available.</p>
               {{/if}}
               <!-- BOOKSHELF SORTING FORM -->
-              <form class="bookshelf-form" action="/private" method="POST">
-                <input type="radio" name="book_id" value="{{this.id}}" />
-                <select name="bookshelf">
+              <form class="bookshelf-select" action="/private" method="POST" value="{{this.id}}" />
+                <select name="bookshelf" class="bookshelf-select">
                   <option value="want_to_read">Want to read</option>
                   <option value="currently_reading">Currently reading</option>
                   <option value="read">Read</option>
@@ -64,7 +59,7 @@
         <ul>
           {{#each want_to_read}}
           <li class="book-card">
-            <h3>{{this.title}}</h3>
+            <h3 class="book-title">{{this.title}}</h3>
             <p>Author: {{this.author}}</p>
               {{#if this.cover}}
                 <img src="{{this.cover}}" alt="{{this.title}}" />
@@ -83,7 +78,7 @@
         <ul>
           {{#each want_to_read}}
           <li class="book-card">
-            <h3>{{this.title}}</h3>
+            <h3 class="book-title">{{this.title}}</h3>
             <p>Author: {{this.author}}</p>
               {{#if this.cover}}
                 <img src="{{this.cover}}" alt="{{this.title}}" />
@@ -102,7 +97,7 @@
         <ul>
           {{#each want_to_read}}
           <li class="book-card">
-            <h3>{{this.title}}</h3>
+            <h3 class="book-title">{{this.title}}</h3>
             <p>Author: {{this.author}}</p>
               {{#if this.cover}}
                 <img src="{{this.cover}}" alt="{{this.title}}" />

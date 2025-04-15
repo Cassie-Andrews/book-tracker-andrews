@@ -67,12 +67,14 @@ h2 {
 }
 h3 {
   font-size: calc(var(--font-size) * 1.5);
+  text-align: left;
 }
 
 a {
   color: var(--dark);
   transition: color 200ms;
 }
+
 a:hover,
 a:focus {
   color: var(--darker);
@@ -86,8 +88,9 @@ button.btn {
   cursor: pointer;
   transition: background-color 200ms;
   color: var(--lightest);
-  max-width: 90px;
+  max-width: 120px;
 }
+
 button.btn-text {
   border: none;
   text-align: center;
@@ -201,6 +204,42 @@ form.search > input {
  min-width: 220px;
  margin-right: var(--space);
  padding: calc(var(--space) * .5) var(--space);
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  padding-left: 0px;
+}
+
+li.book-card {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: space-between;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 960px;
+  margin-top: calc(var(--space) * .5);
+  margin-bottom: calc(var(--space) * .5);
+  background-color: var(--light);
+  padding: var(--space) calc(var(--space) * 2);
+  text-align: left;
+  border: 1px solid var(--darker);
+  border-radius: 4px;
+}
+
+form.bookshelf-select {
+  display: flex;
+
+  justify-content: flex-end;
+}
+
+select.bookshelf-select {
+  color: var(--dark);
+  padding: calc(var(--space) * 0.75) /*calc(var(--space) * 2)*/;
 }
 
 

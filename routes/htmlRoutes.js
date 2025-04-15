@@ -60,13 +60,13 @@ router.get("/private", checkAuth, async (req, res) => {
     let searchResults = [];
     // get book data from user_books table
     if (query) {
-      console.log("Searching for:", query);
       searchResults = await searchAndInsertBooks(query);
+      console.log("Searching for:", query);
       console.log("Search results:", searchResults);
     }
 
     const bookshelves = await userBookController.getBooksByShelf(userId);
-    console.log("Bookshelves for ", userId, "include: ", bookshelves)
+    console.log("Bookshelves for", userId, "include: ", bookshelves)
 
     // render private page w/ book results
     res.render("private", { 

@@ -13,9 +13,11 @@ const books = {
     const query = `
       INSERT INTO books (title, author, cover) 
       VALUES (?, ?, ?)
+      ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id);
     `;
+
     const [result] = await db.query(query, [title, author, cover]);
-    return result.insertID;
+    return result.insertId;
   }
 }
 

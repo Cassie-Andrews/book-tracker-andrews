@@ -6,10 +6,12 @@
     <p>Build your digital bookcase, find new books to read, and track your reading goals all in one place.</p>
   </div>
   <div>
-    <h3>Dev helpers</h3>
-    <p>You are currently {{#unless isLoggedIn}} NOT {{/unless}} logged in.</p>
-    <p>You should {{#unless isLoggedIn}}NOT{{/unless}} be able to access <a href="/private">your profile</a>.</p>
-    <p>Use the header above to {{#if isLoggedIn}} logout{{else}} login or create an account{{/if}}.</p>
+    {{#if isLoggedIn}}
+    <button class="btn" onclick="window.location='/private';">Get started</button>
+    {{else}}
+    <button class="btn" onclick="window.location='/login';">Login</button>
+    <button class="btn" onclick="window.location='/signup';">Sign up</button>
+    {{/if}}
   </div>
 </main>
 {{> footer}}
