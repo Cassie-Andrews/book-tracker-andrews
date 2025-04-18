@@ -8,13 +8,17 @@
     <ul>
         {{#each books}}
         <li class="book-card">
-        <h3 class="book-title">{{this.title}}</h3>
-        <p>Author: {{this.author}}</p>
-            {{#if this.cover}}
-            <img src="{{this.cover}}" alt="{{this.title}}" />
-            {{else}}
-            <p>No cover available.</p>
-            {{/if}}
+            <a class="book-image-area">
+                {{#if this.cover}}
+                    <img src="{{this.cover}}" alt="{{this.title}}" />
+                {{else}}
+                    <p>No cover available.</p>
+                {{/if}}
+            </a>
+            <a class="book-info-area">
+                <h3 class="book-title">{{this.title}}</h3>
+                <p>Author: {{this.author}}</p>
+            </a>
             
             <!-- BOOKSHELF SORTING FORM -->
             <form class="bookshelf-select" action="/private" method="POST" value="{{this.id}}" />

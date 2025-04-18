@@ -15,13 +15,17 @@
       <ul>
         {{#each want_to_read}}
         <li class="book-card">
-          <h3 class="book-title">{{this.title}}</h3>
-          <p>Author: {{this.author}}</p>
+          <a class="book-image-area"></a>
             {{#if this.cover}}
               <img src="{{this.cover}}" alt="{{this.title}}" />
             {{else}}
               <p>No cover available.</p>
             {{/if}}
+          </a>
+          <a class="book-info-area">
+            <h3 class="book-title">{{this.title}}</h3>
+            <p>Author: {{this.author}}</p>
+          </a>
         </li>
         {{/each}}
       </ul>
@@ -32,13 +36,17 @@
       <ul>
         {{#each want_to_read}}
         <li class="book-card">
-          <h3 class="book-title">{{this.title}}</h3>
-          <p>Author: {{this.author}}</p>
+          <a class="book-image-area"></a>
             {{#if this.cover}}
               <img src="{{this.cover}}" alt="{{this.title}}" />
             {{else}}
               <p>No cover available.</p>
             {{/if}}
+          </a>
+          <a class="book-info-area">
+            <h3 class="book-title">{{this.title}}</h3>
+            <p>Author: {{this.author}}</p>
+          </a>
         </li>
         {{/each}}
       </ul>
@@ -49,13 +57,17 @@
       <ul>
         {{#each want_to_read}}
         <li class="book-card">
+          <a class="book-image-area"></a>
+          {{#if this.cover}}
+            <img src="{{this.cover}}" alt="{{this.title}}" />
+          {{else}}
+            <p>No cover available.</p>
+          {{/if}}
+        </a>
+        <a class="book-info-area">
           <h3 class="book-title">{{this.title}}</h3>
           <p>Author: {{this.author}}</p>
-            {{#if this.cover}}
-              <img src="{{this.cover}}" alt="{{this.title}}" />
-            {{else}}
-              <p>No cover available.</p>
-            {{/if}}
+        </a>
         </li>
         {{/each}}
       </ul>
