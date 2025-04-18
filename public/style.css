@@ -134,8 +134,9 @@ header .site-logo {
   text-decoration: none;
   margin: calc(var(--space) * 4) auto;
   display: block;
-  font-size: calc(var(--font-size) * 2.5);
-  font-weight: bold;
+  max-width: 250px;
+  /* font-size: calc(var(--font-size) * 2.5); 
+  font-weight: bold; */
 }
 
 .site-logo:hover {
