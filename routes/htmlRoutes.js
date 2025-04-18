@@ -86,16 +86,40 @@ router.get("/private", checkAuth, async (req, res) => {
 
 
 
-/* SEARCH ROUTE 
+/* SEARCH ROUTE */
 
 // search books
 router.get("/search", checkAuth, async (req, res) => {
   const { query } = req.query
-  // redirects home if query is missing
+  const userId = req.session.userId;
+  const isLoggedIn = req.session.isLoggedIn;
+  // redirects to profile if query is missing
   if (!query) {
-    return res.redirect("/private?error=No query provided")
+    return res.redirect("/private")
   }
   // handle search if there is a query and user is logged in
+  try {
+    let searchResults = [];
+    // get book data from user_books table
+    if (query) {
+      searchResults = await searchAndInsertBooks(query);
+      console.log("Searching for:", query);
+      console.log("Search results:", searchResults);
+    }
+
+    res.render("search", { 
+      isLoggedIn,
+      query,
+      books: searchResults,
+    });
+
+  } catch(err) {
+    // error handling
+    console.error("Error loading /search: ", err.message)
+    res.status(500).send("Error loading /search")
+  }
+
+  /*  
   try {
     const books = await searchAndInsertBooks(query)
     // renders index page with results
@@ -103,9 +127,9 @@ router.get("/search", checkAuth, async (req, res) => {
   } catch (err) {
     res.status(500).send("Error fetching search results: " + err.message)
   } 
+  */
 });
 
-*/
 
 
 

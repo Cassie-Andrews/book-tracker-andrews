@@ -1,116 +1,69 @@
 {{> header}}
 <main class="profile">
-  <div class="sidebar">
-    <img src='/images/anonymousavatar.webp' alt="Avatar" class="profile-photo"/>
-    <h3>Hello, User</h3>
-    <a href="#">Currently Reading</a>
-    <a href="#">Want to Read</a>
-    <a href="#">Read</a>
-  </div>
-
-  <div class="profile-content">
-    <h1>Welcome</h1>
-    <p>This is where your profile will be. You should only be able to see this page if logged in.</p>
 
 
-    <!-- BOOK SEARCH FORM-->
-    <form class="search" action="/private" method="GET">
-      <input type="text" name="query" placeholder="Search for a book by author or title..." required>
-      <button class="btn" type="submit">Search</button>
-    </form>
+<div class="profile-content">
+  <h1>Your library</h1>
+  <p>This is where your bookshelves will be. You should only be able to see this page if logged in.</p>
 
-    <!-- SEARCH RESULTS DISPLAY -->
-    <div class="search-results">
-      {{#if books.length}}
-        <h2>Results:</h2>
-        <ul>
-          {{#each books}}
-          <li class="book-card">
-            <h3 class="book-title">{{this.title}}</h3>
-            <p>Author: {{this.author}}</p>
-              {{#if this.cover}}
-                <img src="{{this.cover}}" alt="{{this.title}}" />
-              {{else}}
-                <p>No cover available.</p>
-              {{/if}}
-              <!-- BOOKSHELF SORTING FORM -->
-              <form class="bookshelf-select" action="/private" method="POST" value="{{this.id}}" />
-                <select name="bookshelf" class="bookshelf-select">
-                  <option value="want_to_read">Want to read</option>
-                  <option value="currently_reading">Currently reading</option>
-                  <option value="read">Read</option>
-                </select>
-                <button class="btn" type="submit">Add to shelf</button>
-              </form>
-          </li>
-          {{/each}}
-        </ul>
-      </div>
-      {{else if query}}
-          <p>No results found for "{{query}}".</p>
-      {{/if}}
-    </div>
   
-    <!-- BOOKSHELVES -->
-    <div class="bookshelves">
-      {{#if currently_reading.length}}
-      <div class="shelf">
-        <h2>Currently Reading</h2>
-        <ul>
-          {{#each want_to_read}}
-          <li class="book-card">
-            <h3 class="book-title">{{this.title}}</h3>
-            <p>Author: {{this.author}}</p>
-              {{#if this.cover}}
-                <img src="{{this.cover}}" alt="{{this.title}}" />
-              {{else}}
-                <p>No cover available.</p>
-              {{/if}}
-          </li>
-          {{/each}}
-        </ul>
-      </div>
-      {{/if}}
+  <!-- BOOKSHELVES -->
+  <div class="bookshelves">
 
-      {{#if want_to_read.length}}
-      <div class="shelf">
-        <h2>Want to Read</h2>
-        <ul>
-          {{#each want_to_read}}
-          <li class="book-card">
-            <h3 class="book-title">{{this.title}}</h3>
-            <p>Author: {{this.author}}</p>
-              {{#if this.cover}}
-                <img src="{{this.cover}}" alt="{{this.title}}" />
-              {{else}}
-                <p>No cover available.</p>
-              {{/if}}
-          </li>
-          {{/each}}
-        </ul>
-      </div>
-      {{/if}}
+    <div class="shelf">
+      <h2>Currently Reading: </h2>
+      <ul>
+        {{#each want_to_read}}
+        <li class="book-card">
+          <h3 class="book-title">{{this.title}}</h3>
+          <p>Author: {{this.author}}</p>
+            {{#if this.cover}}
+              <img src="{{this.cover}}" alt="{{this.title}}" />
+            {{else}}
+              <p>No cover available.</p>
+            {{/if}}
+        </li>
+        {{/each}}
+      </ul>
+    </div>
 
-      {{#if read.length}}
-      <div class="shelf">
-        <h2>Read</h2>
-        <ul>
-          {{#each want_to_read}}
-          <li class="book-card">
-            <h3 class="book-title">{{this.title}}</h3>
-            <p>Author: {{this.author}}</p>
-              {{#if this.cover}}
-                <img src="{{this.cover}}" alt="{{this.title}}" />
-              {{else}}
-                <p>No cover available.</p>
-              {{/if}}
-          </li>
-          {{/each}}
-        </ul>
-      </div>
-      {{/if}}
+    <div class="shelf">
+      <h2>Want to Read: </h2>
+      <ul>
+        {{#each want_to_read}}
+        <li class="book-card">
+          <h3 class="book-title">{{this.title}}</h3>
+          <p>Author: {{this.author}}</p>
+            {{#if this.cover}}
+              <img src="{{this.cover}}" alt="{{this.title}}" />
+            {{else}}
+              <p>No cover available.</p>
+            {{/if}}
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+
+    <div class="shelf">
+      <h2>Read: </h2>
+      <ul>
+        {{#each want_to_read}}
+        <li class="book-card">
+          <h3 class="book-title">{{this.title}}</h3>
+          <p>Author: {{this.author}}</p>
+            {{#if this.cover}}
+              <img src="{{this.cover}}" alt="{{this.title}}" />
+            {{else}}
+              <p>No cover available.</p>
+            {{/if}}
+        </li>
+        {{/each}}
+      </ul>
     </div>
 
   </div>
+
+</div>
+
 </main>
 {{> footer}}

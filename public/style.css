@@ -24,8 +24,20 @@ body {
   min-height: 100vh;
 }
 
+form.search {
+  display: flex;
+  align-content: space-between;
+}
+
+form.search > input {
+ min-width: 220px;
+ margin-right: var(--space);
+ padding: calc(var(--space) * .5) var(--space);
+}
+
 .nav-link {
   color: var(--lightest);
+  margin: var(--space);
 }
 
 .nav-link:hover {
@@ -52,10 +64,10 @@ h1 {
   font-size: calc(var(--font-size) * 2.25);
 }
 h2 {
-  font-size: calc(var(--font-size) * 2);
+  font-size: calc(var(--font-size) * 1.5);
 }
 h3 {
-  font-size: calc(var(--font-size) * 1.5);
+  font-size: calc(var(--font-size) * 1.25);
   text-align: left;
 }
 
@@ -69,32 +81,24 @@ a:focus {
   color: var(--darker);
 }
 
-button.btn {
-  border: var(--lightest);
+.btn {
+  border: var(--darkest);
   border-radius: 4px;
-  background-color: var(--darker);
+  background-color: var(--light);
   padding: calc(var(--space) * 0.75) /*calc(var(--space) * 2)*/;
   cursor: pointer;
   transition: background-color 200ms;
-  color: var(--lightest);
+  color: var(--darkest);
   max-width: 120px;
+  text-align: center;
 }
 
-button.btn-text {
-  border: none;
-  text-align: center;
-  background-color: transparent;
-  color: var(--lightest);
-  transition: 200ms;
-  cursor: pointer;
-}
 
 button.btn:hover,
 button.btn:focus {
   background-color: var(--dark);
   color: var(--lightest)
 }
-
 
 
 header {
@@ -107,26 +111,18 @@ header {
   border-bottom: 1px solid var(--darkest);
 }
 
-header a {
+header > div {
   margin: var(--space);
 }
 
-header .site-logo {
-  font-size: calc(var(--font-size) * 1.5);
-  margin: var(--space);
-  margin-right: auto;
-}
 
 .site-logo {
   color: var(--lightest);
   text-decoration: none;
-  margin: calc(var(--space) * 4) auto;
   display: block;
   max-width: 250px;
-  /* 
-  text-align: center;
-  font-size: calc(var(--font-size) * 2.5); 
-  font-weight: bold; */
+  font-size: calc(var(--font-size) * 1.5);
+  margin: var(--space);
 }
 
 /*
@@ -188,16 +184,6 @@ header .site-logo {
 }
 
 /* PROFILE - book search */
-form.search {
-  display: flex;
-  align-content: space-between;
-}
-
-form.search > input {
- min-width: 220px;
- margin-right: var(--space);
- padding: calc(var(--space) * .5) var(--space);
-}
 
 ul {
   list-style: none;

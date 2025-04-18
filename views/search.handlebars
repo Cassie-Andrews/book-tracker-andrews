@@ -1,0 +1,37 @@
+{{> header}}
+<main class="search">
+
+<!-- SEARCH RESULTS DISPLAY -->
+<div class="search-results">
+    {{#if books.length}}
+    <h2>Results:</h2>
+    <ul>
+        {{#each books}}
+        <li class="book-card">
+        <h3 class="book-title">{{this.title}}</h3>
+        <p>Author: {{this.author}}</p>
+            {{#if this.cover}}
+            <img src="{{this.cover}}" alt="{{this.title}}" />
+            {{else}}
+            <p>No cover available.</p>
+            {{/if}}
+            
+            <!-- BOOKSHELF SORTING FORM -->
+            <form class="bookshelf-select" action="/private" method="POST" value="{{this.id}}" />
+            <select name="bookshelf" class="bookshelf-select">
+                <option value="want_to_read">Want to read</option>
+                <option value="currently_reading">Currently reading</option>
+                <option value="read">Read</option>
+            </select>
+            <button class="btn" type="submit">Add to shelf</button>
+            </form>
+        </li>
+        {{/each}}
+    </ul>
+        {{else if query}}
+            <p>No results found for "{{query}}".</p>
+        {{/if}}
+</div>
+
+</main>
+{{> footer}}
