@@ -9,17 +9,6 @@
   --font-size: 18px;
 }
 
-/* <weight>: Use a value from 400 to 800
-<uniquifier>: Use a unique and descriptive class name
-
-.syne-<uniquifier> {
-  font-family: "Syne", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-}
-*/
-
 body {
   background-color: var(--light);
   color: var(--darkest);
@@ -129,19 +118,22 @@ header .site-logo {
 }
 
 .site-logo {
-  text-align: center;
   color: var(--lightest);
   text-decoration: none;
   margin: calc(var(--space) * 4) auto;
   display: block;
   max-width: 250px;
-  /* font-size: calc(var(--font-size) * 2.5); 
+  /* 
+  text-align: center;
+  font-size: calc(var(--font-size) * 2.5); 
   font-weight: bold; */
 }
 
+/*
 .site-logo:hover {
   color: var(--light);
 }
+*/
 
 .login-form {
   display: flex;
