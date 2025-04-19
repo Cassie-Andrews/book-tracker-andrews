@@ -1,3 +1,4 @@
+const express = require("express");
 const router = require("express").Router();
 const { auth, book } = require("../controllers");
 const { searchAndInsertBooks } = require("../controllers/book")
@@ -40,7 +41,7 @@ router.get("/login", async (req, res) => {
 
 // renders signup page
 router.get("/signup", async (req, res) => {
-  if (req.session.isLoggedIn) return res.redirect("/");
+  if (req.session.isLoggedIn) return res.redirect("/private");
   // error handling
   res.render("signup", { error: req.query.error });
 });
@@ -130,6 +131,10 @@ router.get("/search", checkAuth, async (req, res) => {
   */
 });
 
+
+/* BOOKSHELF SORT FORM */
+
+router.post("/add-to-bookshelf", checkAuth, userBookController.addToShelf)
 
 
 

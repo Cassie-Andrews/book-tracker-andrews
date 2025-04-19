@@ -21,12 +21,14 @@
             </a>
             
             <!-- BOOKSHELF SORTING FORM -->
-            <form class="bookshelf-select" action="/private" method="POST" value="{{this.id}}" />
-            <select name="bookshelf" class="bookshelf-select">
-                <option value="want_to_read">Want to read</option>
-                <option value="currently_reading">Currently reading</option>
-                <option value="read">Read</option>
-            </select>
+            <form class="bookshelf-select" action="/add-to-bookshelf" method="POST" />
+                <input type="hidden" name="book_id" value="{{this.id}}">
+                <select name="bookshelf" required>
+                    <option value="want_to_read">Want to read</option>
+                    <option value="currently_reading">Currently reading</option>
+                    <option value="read">Read</option>
+                </select>
+                <input type="hidden" name="user_id" value="{{user.id}}">
             <button class="btn" type="submit">Add to shelf</button>
             </form>
         </li>

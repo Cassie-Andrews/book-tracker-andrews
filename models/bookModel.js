@@ -9,16 +9,23 @@ const books = {
   },
 
   // insert book
-  async insertBook(title, author, cover) {
-    const query = `
-      INSERT INTO books (title, author, cover) 
-      VALUES (?, ?, ?)
-      ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id);
-    `;
+  async insertBook(title, author, cover, ol_id) {
+    const [result] = await db.query (
+      'INSERT INTO books (title, author, cover, ol_id) VALUES (?, ?, ?, ?)'
+      [title, author, cover, ol_id]
+    );
 
-    const [result] = await db.query(query, [title, author, cover]);
     return result.insertId;
   }
 }
 
-module.exports = books;
+// get book by ol_id
+async function getBookByOlId(ol_id) {
+  const [rows] = await db.query(
+    'SELECT * FROM books WHERE ol_id = ?',
+    [ol_id]
+  );
+  return rows[0] || null;
+}
+
+module.exports = { books, getBookByOlId };

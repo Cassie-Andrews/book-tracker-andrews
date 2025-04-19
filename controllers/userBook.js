@@ -1,5 +1,6 @@
 const db = require('../config/connection')
 
+
 // add a book to a shelf
 async function addToShelf(req, res) {
     // we need: book id, shelf "id", user id
@@ -7,11 +8,27 @@ async function addToShelf(req, res) {
     const user_id = req.session.userId;
 
     try {
-        await db.query(
-            `INSERT INTO user_books (user_id, book_id, bookshelf) VALUES (?, ?, ?)`,
-            [user_id, book_id, bookshelf]
-        )
+        const [existing] = await db.query(
+            `SELECT * FROM user_books WHERE user_id = ? AND book_id = ?`,
+            [user_id, book_id]
+        );
+
+        if (existing.length > 0) {
+            // handle updating a book that's already shelved
+            await db.query(
+                `UPDATE user_books SET bookshelf = ? WHERE user_id = ? AND book_id = ?`,
+                [bookshelf, user_id, book_id]
+            );
+        } else {
+            // insert a new book to a shelf
+            await db.query(
+                `INSERT INTO user_books (user_id, book_id, bookshelf) VALUES (?, ?, ?)`,
+                [user_id, book_id, bookshelf]
+            );
+        }
+            
         res.redirect('/private');
+
     } catch(err) {
         console.error('Error adding to shelf:', err.message);
         res.status(500).send('Error adding book to shelf');
