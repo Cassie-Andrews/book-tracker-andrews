@@ -1,44 +1,50 @@
 const bookModel = require('../models/bookModel')
 const fetch = require('node-fetch')
 const { fetchOpenLibraryData } = require('../api/bookApi');
-const e = require('express');
+// const e = require('express');
 
 
 //search and insert books from API
 async function searchAndInsertBooks(query) {
     const booksFromAPI = await fetchOpenLibraryData(query);
+    const results = [];
     const inserted = [];
 
     //loop through each book
     for (const book of booksFromAPI) {
-        const title = book.title || "Untitled";
-        const author = Array.isArray(book.author_name) && book.author_name.length > 0 ? book.author_name[0] : "Unknown";
-        const ol_id = book.id?.replace('/works/', '') || null; // Open Library ID
-        const cover = book.cover_i 
-            ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
-            : null;
-            console.log("Attempting to insert:", {title, author, ol_id, cover})
+        const { title = "Untitled", author = "Unknown", ol_id = null, cover = null } = book;
+            
+        console.log("Processing:", { title, author, cover, ol_id })
 
         try {
-            const existing = await bookModel.getBookByOlId(ol_id);
 
-            let dbBook;
-            if (!existing) {
-                const insertId = await bookModel.insertBook(title, author, ol_id, cover);
-                dbBook = { id: insertId, title, author, cover };
-            } else {
-                dbBook = existing;
+            let existingBook = null
+
+            if (ol_id) {
+                existingBook = await bookModel.getBookByOlId(ol_id)
             }
 
-            inserted.push(dbBook);
+            if (!existingBook) {
+                existingBook = await bookModel.getBookByTitle(title)
+            }
 
+            if (existingBook) {
+                console.log(`${title} has already been added to the database`)
+                results.push(existingBook)
+            } else {
+                const insertId = await bookModel.insertBook(title, author, cover, ol_id)
+                const newBook = { id: insertId, title, author, cover };
+
+                results.push(newBook);
+            }
+            
         } catch (err) {
-            console.error(`Failed to insert book: ${title}`, err.message);
-        }
+            console.error(`Error processing: ${title}`, err.message);
+        } 
     }
 
     console.log("Inserted/found:", inserted);
-    return inserted;
+    return results;
 }
 
 /*

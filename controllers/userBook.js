@@ -23,7 +23,7 @@ async function addToShelf(req, res) {
             // insert a new book to a shelf
             await db.query(
                 `INSERT INTO user_books (user_id, book_id, bookshelf) VALUES (?, ?, ?)`,
-                [user_id, book_id, bookshelf]
+                [users_id, books_id, bookshelf, rating, ]
             );
         }
             
@@ -40,8 +40,8 @@ async function getBooksByShelf(userId) {
     const [rows] = await db.query(
         `SELECT books.*, user_books.bookshelf
         FROM user_books
-        JOIN books ON user_books.book_id = books.id
-        WHERE user_books.user_id = ?`,
+        JOIN books ON user_books.books_id = books.id
+        WHERE user_books.users_id = ?`,
         [userId]
     );
     // filter by bookshelf
