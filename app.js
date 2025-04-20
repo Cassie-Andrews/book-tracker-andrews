@@ -6,6 +6,7 @@ const MySQLStore = require("express-mysql-session")(session);
 const connection = require("./config/connection");
 const apiRoutes = require("./routes/apiRoutes");
 const htmlRoutes = require("./routes/htmlRoutes");
+const bookshelfRoutes = require("./routes/bookshelfRoutes");
 const app = express();
 
 const sessionStore = new MySQLStore({
@@ -34,6 +35,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./public"));
 
 app.use("/api", apiRoutes);
-app.use("/", htmlRoutes);
+app.use("/", htmlRoutes, bookshelfRoutes);
 
 module.exports = app;

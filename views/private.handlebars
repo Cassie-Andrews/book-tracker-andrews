@@ -29,15 +29,14 @@
                 </div>
                 <!-- BOOKSHELF SORTING FORM -->
                 <div>
-                <form class="bookshelf-select" action="/add-to-bookshelf" method="POST" />
-                    <input type="hidden" name="book_id" value="{{this.id}}" onchange="this.form.submit()">
-                    <select name="bookshelf" required>
+                <form class="bookshelf-select" action="/add-to-bookshelf" method="POST">
+                    <input type="hidden" name="book_id" value="{{this.id}}">
+                    <select name="bookshelf" required onchange="this.form.submit()">
                         <option value="" disabled selected hidden>Add to a different bookshelf</option>
                         <option value="want_to_read">Want to read</option>
                         <option value="currently_reading">Currently reading</option>
                         <option value="read">Read</option>
                     </select>
-                    <input type="hidden" name="user_id" value="{{user.id}}">
                 </form>
                 </div>
             </div>
@@ -64,15 +63,14 @@
                 </div>
                 <!-- BOOKSHELF SORTING FORM -->
                 <div>
-                <form class="bookshelf-select" action="/add-to-bookshelf" method="POST" />
-                    <input type="hidden" name="book_id" value="{{this.id}}" onchange="this.form.submit()">
-                    <select name="bookshelf" required>
+                <form class="bookshelf-select" action="/add-to-bookshelf" method="POST">
+                    <input type="hidden" name="book_id" value="{{this.id}}">
+                    <select name="bookshelf" required onchange="this.form.submit()">
                         <option value="" disabled selected hidden>Add to a different bookshelf</option>
                         <option value="want_to_read">Want to read</option>
                         <option value="currently_reading">Currently reading</option>
                         <option value="read">Read</option>
                     </select>
-                    <input type="hidden" name="user_id" value="{{user.id}}">
                 </form>
                 </div>
             </div>
@@ -100,15 +98,14 @@
                 </div>
                 <!-- BOOKSHELF SORTING FORM -->
                 <div>
-                <form class="bookshelf-select" action="/add-to-bookshelf" method="POST" />
+                <form class="bookshelf-select" action="/add-to-bookshelf" method="POST">
                     <input type="hidden" name="book_id" value="{{this.id}}" onchange="this.form.submit()">
-                    <select name="bookshelf" required>
+                    <select name="bookshelf" required onchange="this.form.submit()">
                         <option value="" disabled selected hidden>Add to a different bookshelf</option>
                         <option value="want_to_read">Want to read</option>
                         <option value="currently_reading">Currently reading</option>
                         <option value="read">Read</option>
                     </select>
-                    <input type="hidden" name="user_id" value="{{user.id}}">
                 </form>
                 </div>
             </div>

@@ -7,23 +7,27 @@ async function addToShelf(req, res) {
     const { book_id, bookshelf } = req.body;
     const user_id = req.session.userId;
 
+    if(!user_id || !book_id || !bookshelf) {
+        return res.status(400).send('Missing required fields')
+    }
+
     try {
         const [existing] = await db.query(
-            `SELECT * FROM user_books WHERE user_id = ? AND book_id = ?`,
+            `SELECT * FROM user_books WHERE users_id = ? AND books_id = ?`,
             [user_id, book_id]
         );
 
         if (existing.length > 0) {
             // handle updating a book that's already shelved
             await db.query(
-                `UPDATE user_books SET bookshelf = ? WHERE user_id = ? AND book_id = ?`,
+                `UPDATE user_books SET bookshelf = ? WHERE users_id = ? AND books_id = ?`,
                 [bookshelf, user_id, book_id]
             );
         } else {
             // insert a new book to a shelf
             await db.query(
-                `INSERT INTO user_books (user_id, book_id, bookshelf) VALUES (?, ?, ?)`,
-                [users_id, books_id, bookshelf, rating, ]
+                `INSERT INTO user_books (users_id, books_id, bookshelf) VALUES (?, ?, ?)`,
+                [user_id, book_id, bookshelf]
             );
         }
             
@@ -48,7 +52,7 @@ async function getBooksByShelf(userId) {
     //('want_to_read', 'reading', 'read')
     return {
         wantToRead: rows.filter(b => b.bookshelf === 'want_to_read'),
-        currentlyReading: rows.filter(b => b.bookshelf === 'reading'),
+        currentlyReading: rows.filter(b => b.bookshelf === 'currently_reading'),
         read: rows.filter(b => b.bookshelf === 'read')
     };    
 }

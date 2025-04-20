@@ -133,8 +133,8 @@ router.get("/search", checkAuth, async (req, res) => {
 
 
 /* BOOKSHELF SORT FORM */
-
-router.post("/add-to-bookshelf", checkAuth, userBookController.addToShelf)
+const bookshelfRoutes = require('./bookshelfRoutes')
+router.use("/", bookshelfRoutes)
 
 
 
