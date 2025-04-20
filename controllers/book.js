@@ -12,8 +12,8 @@ async function searchAndInsertBooks(query) {
     //loop through each book
     for (const book of booksFromAPI) {
         const title = book.title || "Untitled";
-        const author = Array.isArray(book.author_name) ? book.author_name[0] : "Unknown";
-        const ol_id = book.key?.replace('/works/', '') || null; // Open Library ID
+        const author = Array.isArray(book.author_name) && book.author_name.length > 0 ? book.author_name[0] : "Unknown";
+        const ol_id = book.id?.replace('/works/', '') || null; // Open Library ID
         const cover = book.cover_i 
             ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
             : null;
@@ -24,7 +24,7 @@ async function searchAndInsertBooks(query) {
 
             let dbBook;
             if (!existing) {
-                const insertId = await bookModel.insertBook({title, author, ol_id, cover});
+                const insertId = await bookModel.insertBook(title, author, ol_id, cover);
                 dbBook = { id: insertId, title, author, cover };
             } else {
                 dbBook = existing;

@@ -2,8 +2,6 @@ const indexModel = require("../models/indexModel");
 const userModel = require("../models/userModel");
 
 
-
-
 async function login(req, res) {
   try {
     const { username, password } = req.body;

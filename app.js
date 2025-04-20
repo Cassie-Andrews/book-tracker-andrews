@@ -8,7 +8,10 @@ const apiRoutes = require("./routes/apiRoutes");
 const htmlRoutes = require("./routes/htmlRoutes");
 const app = express();
 
-const sessionStore = new MySQLStore({}, connection);
+const sessionStore = new MySQLStore({
+  createDatabaseTable: true
+}, connection);
+
 app.use(
   session({
     key: "session_cookie",
