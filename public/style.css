@@ -218,6 +218,8 @@ li.book-card {
 
 img.book-cover {
   max-width: 180px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
 }
 
 form.bookshelf-select {
@@ -226,9 +228,10 @@ form.bookshelf-select {
   justify-content: flex-end;
 }
 
-select.bookshelf-select {
+form.bookshelf-select > select {
   color: var(--dark);
-  padding: calc(var(--space) * 0.75) /*calc(var(--space) * 2)*/;
+  padding: calc(var(--space) * 0.75) var(--space);
+  margin-bottom: calc(var(--space) * 0.75);
 }
 
 

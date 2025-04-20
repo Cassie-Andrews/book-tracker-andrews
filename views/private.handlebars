@@ -30,9 +30,9 @@
                 <!-- BOOKSHELF SORTING FORM -->
                 <div>
                 <form class="bookshelf-select" action="/add-to-bookshelf" method="POST" />
-                    <label for:"bookshelf">Choose a bookshelf:</label>
                     <input type="hidden" name="book_id" value="{{this.id}}" onchange="this.form.submit()">
                     <select name="bookshelf" required>
+                        <option value="" disabled selected hidden>Add to a different bookshelf</option>
                         <option value="want_to_read">Want to read</option>
                         <option value="currently_reading">Currently reading</option>
                         <option value="read">Read</option>
@@ -65,9 +65,9 @@
                 <!-- BOOKSHELF SORTING FORM -->
                 <div>
                 <form class="bookshelf-select" action="/add-to-bookshelf" method="POST" />
-                    <label for:"bookshelf">Choose a bookshelf:</label>
                     <input type="hidden" name="book_id" value="{{this.id}}" onchange="this.form.submit()">
                     <select name="bookshelf" required>
+                        <option value="" disabled selected hidden>Add to a different bookshelf</option>
                         <option value="want_to_read">Want to read</option>
                         <option value="currently_reading">Currently reading</option>
                         <option value="read">Read</option>
@@ -101,9 +101,9 @@
                 <!-- BOOKSHELF SORTING FORM -->
                 <div>
                 <form class="bookshelf-select" action="/add-to-bookshelf" method="POST" />
-                    <label for:"bookshelf">Choose a bookshelf:</label>
                     <input type="hidden" name="book_id" value="{{this.id}}" onchange="this.form.submit()">
                     <select name="bookshelf" required>
+                        <option value="" disabled selected hidden>Add to a different bookshelf</option>
                         <option value="want_to_read">Want to read</option>
                         <option value="currently_reading">Currently reading</option>
                         <option value="read">Read</option>
