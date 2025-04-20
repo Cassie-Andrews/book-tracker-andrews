@@ -183,7 +183,7 @@ header > div {
   padding: var(--space) calc(var(--space) * 2);
 }
 
-/* PROFILE - book search */
+/* Book cards */
 
 ul {
   list-style: none;
@@ -195,7 +195,7 @@ ul {
 li.book-card {
   list-style: none;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
   align-content: space-between;
   box-sizing: border-box;
@@ -210,9 +210,19 @@ li.book-card {
   border-radius: 4px;
 }
 
+.book-info-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+img.book-cover {
+  max-width: 180px;
+}
+
 form.bookshelf-select {
   display: flex;
-
+  flex-direction: column;
   justify-content: flex-end;
 }
 
