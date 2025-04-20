@@ -20,10 +20,10 @@ CREATE TABLE user_books (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   users_id INT,
   books_id INT, 
-  books_ol_id VARCHAR(255),
+  --books_ol_id VARCHAR(255) UNIQUE,
   bookshelf ENUM('want_to_read', 'reading', 'read') NOT NULL,
   rating INT,
   FOREIGN KEY (users_id) REFERENCES users(id) ON DELETE CASCADE,
   FOREIGN KEY (books_id) REFERENCES books(id) ON DELETE CASCADE,
-  FOREIGN KEY (books_ol_id) REFERENCES books(ol_id)
+  -- FOREIGN KEY (books_ol_id) REFERENCES books(ol_id)
 );
