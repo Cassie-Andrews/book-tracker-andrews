@@ -1,8 +1,11 @@
 <header>
-  <div>
-    <img class="site-logo" src="/images/Full_Lightest.webp" href="/">
-  </div>
-  {{#if isLoggedIn}}
+  {{#if isLoggedIn}}  
+    <div>
+      <a href="http://localhost:3000/private">
+        <img class="site-logo" src="/images/Full_Lightest.webp" href="/">
+      </a>
+    </div>
+  
     <div>
       <form class="search" action="/search" method="GET">
       <input type="text" name="query" placeholder="Search for a book by author or title..." required>
@@ -14,6 +17,10 @@
     <a class="nav-link" href="/logout">Logout</a>
     </div>
   {{else}}
-
+    <div>
+      <a href="http://localhost:3000">
+        <img class="site-logo" src="/images/Full_Lightest.webp" href="/">
+      </a>
+    </div>
   {{/if}}
 </header>

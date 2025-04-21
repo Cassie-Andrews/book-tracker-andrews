@@ -30,8 +30,11 @@
                         </div>
                         <!-- BOOKSHELF SORTING FORM -->
                         <div>
-                        <form action="/add-to-bookshelf" class="bookshelf-select" method="POST">
-                            <input type="hidden" name="book_id" value="{{this.id}}">
+                        <form action="/api/add-to-bookshelf" class="bookshelf-select" method="POST">
+                            <input type="hidden" name="ol_id" value="{{this.ol_id}}">
+                            <input type="hidden" name="title" value="{{this.title}}">
+                            <input type="hidden" name="author" value="{{this.author}}">
+                            <input type="hidden" name="cover" value="{{this.cover}}">
                             
                             <select name="bookshelf" required>
                                 <option value="want_to_read">Want to read</option>
@@ -41,7 +44,7 @@
                             
                             <button type="submit">Add to shelf</button>
                         </form>
-                        <form action="/remove-from-bookshelf" class="bookshelf-remove" method="POST">
+                        <form action="/api/remove-from-bookshelf" class="bookshelf-remove" method="POST">
                             <input type="hidden" name="book_id" value="{{this.id}}">
                             <button type="submit" class="">Remove</button>
                         </form>
@@ -75,8 +78,11 @@
                         </div>
                         <!-- BOOKSHELF SORTING FORM -->
                         <div>
-                        <form action="/add-to-bookshelf" class="bookshelf-select" method="POST">
-                            <input type="hidden" name="book_id" value="{{this.id}}">
+                        <form action="/api/add-to-bookshelf" class="bookshelf-select" method="POST">
+                            <input type="hidden" name="ol_id" value="{{this.ol_id}}">
+                            <input type="hidden" name="title" value="{{this.title}}">
+                            <input type="hidden" name="author" value="{{this.author}}">
+                            <input type="hidden" name="cover" value="{{this.cover}}">
                             
                             <select name="bookshelf" required>
                                 <option value="want_to_read">Want to read</option>
@@ -86,7 +92,7 @@
                             
                             <button type="submit">Add to shelf</button>
                         </form>
-                        <form action="/remove-from-bookshelf" class="bookshelf-remove" method="POST">
+                        <form action="/api/remove-from-bookshelf" class="bookshelf-remove" method="POST">
                             <input type="hidden" name="book_id" value="{{this.id}}">
                             <button type="submit" class="">Remove</button>
                         </form>
@@ -120,8 +126,11 @@
                         </div>
                         <!-- BOOKSHELF SORTING FORM -->
                         <div>
-                        <form action="/add-to-bookshelf" class="bookshelf-select" method="POST">
-                            <input type="hidden" name="book_id" value="{{this.id}}">
+                        <form action="/api/add-to-bookshelf" class="bookshelf-select" method="POST">
+                            <input type="hidden" name="ol_id" value="{{this.ol_id}}">
+                            <input type="hidden" name="title" value="{{this.title}}">
+                            <input type="hidden" name="author" value="{{this.author}}">
+                            <input type="hidden" name="cover" value="{{this.cover}}">
                             
                             <select name="bookshelf" required>
                                 <option value="want_to_read">Want to read</option>
@@ -131,7 +140,7 @@
                             
                             <button type="submit">Add to shelf</button>
                         </form>
-                        <form action="/remove-from-bookshelf" class="bookshelf-remove" method="POST">
+                        <form action="/api/remove-from-bookshelf" class="bookshelf-remove" method="POST">
                             <input type="hidden" name="book_id" value="{{this.id}}">
                             <button type="submit" class="">Remove</button>
                         </form>

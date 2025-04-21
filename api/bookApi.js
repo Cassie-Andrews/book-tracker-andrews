@@ -3,12 +3,13 @@ const fetch = require('node-fetch')
 
 // get books from api
 async function fetchOpenLibraryData(query) {
-    const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(query)}&mode=everything&limit=4`
+    const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(query)}&mode=everything&limit=4`;
 
     try {
         const response = await fetch(url);
         const data = await response.json();
-            console.log('JSON response: ', data.docs);
+        
+        console.log('JSON response: ', data.docs);
         
         return data.docs
             .filter(book => book.title) // only use books with a title

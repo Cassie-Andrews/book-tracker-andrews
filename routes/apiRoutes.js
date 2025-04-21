@@ -3,8 +3,10 @@ const db = require("../config/connection");
 const checkAuth = require("../middleware/auth");
 
 const controllers = require("../controllers");
-const { fetchOpenLibraryData } = require("../api/bookApi");
-const { searchAndInsertBooks } = require("../controllers/book");
+const { fetchOpenLibraryData } = require("../api/bookApi"); 
+//use for fetchOpenLibraryData for search results
+const { searchAndInsertBooks, removeFromBookshelf, addToBookshelf } = require("../controllers/book"); 
+// use searchAndInsertBooks for adding to a bookshelf
 const userBookController = require("../controllers/userBook")
 
 
@@ -20,61 +22,41 @@ router.post("/signup", controllers.auth.signup);
 
 // add to shelf
 router.post('/add-to-bookshelf', checkAuth, async (req, res) => {
-    const user_id = req.session.userId;
-    const { book_id, bookshelf } = req.body;
-    console.log(user_id, req.body);
+    const userId = req.session.userId;
+    const { ol_id, title, bookshelf } = req.body;
+    
+    console.log(userId, req.body);
 
-    if (!user_id || !book_id || !bookshelf) {
-        return res.status(400).send('Missing required fields');
-    }
-
-    const validBookshelves = ['want_to_read', 'currently_reading', 'read']
-    if (!validBookshelves.includes(bookshelf)) {
-        return res.status(400).send('Invalid bookshelf value');
+    if(!userId || (!ol_id && !title) || !bookshelf) {
+        return res.status(400).send('Missing required fields')
     }
 
     try {
-        const [existing] = await db.query(
-            'SELECT * FROM user_books WHERE users_id = ? AND books_id = ?',
-            [user_id, book_id]
-        );
+        const insertedBooks = await searchAndInsertBooks(ol_id || title);
+        const book = insertedBooks[0];
 
-        if (existing.length > 0) {
-            await db.query(
-                'UPDATE user_books SET bookshelf = ? WHERE users_id = ? AND books_id = ?',
-                [bookshelf, user_id, book_id]
-            );
-        } else {
-            await db.query (
-                'INSERT INTO user_books (users_id, books_id, bookshelf) VALUES (?, ?, ?)',
-                [user_id, book_id, bookshelf]
-            )
+        if(!book || !book.id) {
+            return res.status(500).send('Book could not be inserted')
         }
 
-        res.redirect('/private'); // maybe '/back'
+        await addToBookshelf(userId, book.id, bookshelf);
 
+        res.redirect(req.get('Referer' || '/private')); // maybe '/back'
     } catch(err) {
         console.error('Error adding book to shelf', err.message);
-        res.status(500).send('Server error')
+        res.status(500).send('Server error');
     }
-})
+});
+
 
 // remove from shelf
 router.post('/remove-from-bookshelf', checkAuth, async (req, res) => {
-    const userId = req.session.userId
-    const { book_id } = req.body
-
-    if (!userId || !book_id) {
-        return res.status(400).send('Unable to delete, insufficient information');
-    }
+    const userId = req.session.userId;
+    const { bookId } = req.body;
 
     try {
-        await db.query(
-            'DELETE FROM user_books WHERE users_id = ? AND books_id = ?',
-            [userId, book_id]
-        );
-
-        res.redirect('/private');
+        await removeFromBookshelf(userId, bookId);
+        res.redirect('/private');        
     } catch(err) {
         console.error('Error removing book', err.message);
         res.status(500).send('Error removing book')
