@@ -12,31 +12,8 @@ const userBookController = require("../controllers/userBook")
 
 router.post("/login", controllers.auth.login);
 router.get("/logout", controllers.auth.logout);
-router.post("/signup", controllers.user.create);
+router.post("/signup", controllers.auth.signup);
 
-
-// BOOK SEARCH ROUTE
-
-router.get("/search", async (req, res) => {
-    const { query } = req.query;
-    // if no query, redirect to private w/ error message
-    if(!query) {
-        return res.redirect("/private?error=No query provided");
-    }
-    
-    try {
-        // get book data from api
-        const books = await fetchOpenLibraryData(query);
-        // render private page w/ book results
-        res.render("private", { 
-            isLoggedIn: req.session.isLoggedIn,
-            books
-         })
-    } catch(err) {
-        console.log("Error fetching results:", err)
-        res.status(500).send("Error fetching results:" + err.message)
-    }
-})
 
 
 // USER BOOKSHELF ROUTES
@@ -136,5 +113,27 @@ router.get('/private', checkAuth, async (req, res) => {
     }
 });
 
+// BOOK SEARCH ROUTE
+
+router.get("/search", async (req, res) => {
+    const { query } = req.query;
+    // if no query, redirect to private w/ error message
+    if(!query) {
+        return res.redirect("/private?error=No query provided");
+    }
+    
+    try {
+        // get book data from api
+        const books = await fetchOpenLibraryData(query);
+        // render private page w/ book results
+        res.render("private", { 
+            isLoggedIn: req.session.isLoggedIn,
+            books
+         })
+    } catch(err) {
+        console.log("Error fetching results:", err)
+        res.status(500).send("Error fetching results:" + err.message)
+    }
+})
 
 module.exports = router;

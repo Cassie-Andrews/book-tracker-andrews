@@ -1,6 +1,6 @@
 const express = require("express");
 const router = require("express").Router();
-const { auth, book } = require("../controllers");
+const { auth, book, userBook } = require("../controllers");
 const { searchAndInsertBooks } = require("../controllers/book")
 const userBookController = require("../controllers/userBook")
 const checkAuth = require("../middleware/auth");
@@ -15,8 +15,7 @@ router.get("/", async (req, res) => {
   const { isLoggedIn } = req.session || {};
   // when logged in, gets all books then displays them
   try {
-    const books = await book.searchAndInsertBooks();
-    res.render("index", { books, isLoggedIn });
+    res.render("index", { isLoggedIn });
   } catch(err) {
     res.status(500).send("Error fetching books: " + err.message);
   }
