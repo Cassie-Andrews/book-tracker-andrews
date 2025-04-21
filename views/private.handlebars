@@ -7,34 +7,137 @@
         
         <!-- BOOKSHELVES -->
         <div class="bookshelves">
-            {{#if books.currently_reading.length}}
+
+            <!-- CURRENTLY READING -->
+            {{#if booksByShelf.currently_reading.length}}
             <div class="shelf">
             <h2>Currently Reading: </h2>
             <ul>
-                {{#each books.currently_reading}}
-                    {{> bookcard}}
+                {{#each booksByShelf.currently_reading}}
+                    <li class="book-card">
+                    <div class="book-cover-area">
+                        {{#if this.cover}}
+                            <img src="{{this.cover}}" class="book-cover" alt="{{this.title}}" />
+                        {{else}}
+                            <img src="/images/cover_unavailable.webp" alt="Book cover unavailable." />
+                        {{/if}}
+                    </div>
+                    
+                    <div class="book-info-area">
+                        <div>
+                            <h3 class="book-title">{{this.title}}</h3>
+                            <p>Author: {{this.author}}</p>
+                        </div>
+                        <!-- BOOKSHELF SORTING FORM -->
+                        <div>
+                        <form action="/add-to-bookshelf" class="bookshelf-select" method="POST">
+                            <input type="hidden" name="book_id" value="{{this.id}}">
+                            
+                            <select name="bookshelf" required>
+                                <option value="want_to_read">Want to read</option>
+                                <option value="currently_reading">Currently reading</option>
+                                <option value="read">Read</option>
+                            </select>
+                            
+                            <button type="submit">Add to shelf</button>
+                        </form>
+                        <form action="/remove-from-bookshelf" class="bookshelf-remove" method="POST">
+                            <input type="hidden" name="book_id" value="{{this.id}}">
+                            <button type="submit" class="">Remove</button>
+                        </form>
+                        </div>
+                    </div>
+                </li>
                 {{/each}}
             </ul>
             </div>
             {{/if}}
 
-            {{#if books.want_to_read.length}}
+            <!-- WANT TO READ -->
+            {{#if booksByShelf.want_to_read.length}}
             <div class="shelf">
-            <h2>Want to read: </h2>
+            <h2>Want to Read: </h2>
             <ul>
-                {{#each books.want_to_read}}
-                    {{> bookcard}}
+                {{#each booksByShelf.want_to_read}}
+                    <li class="book-card">
+                    <div class="book-cover-area">
+                        {{#if this.cover}}
+                            <img src="{{this.cover}}" class="book-cover" alt="{{this.title}}" />
+                        {{else}}
+                            <img src="/images/cover_unavailable.webp" alt="Book cover unavailable." />
+                        {{/if}}
+                    </div>
+                    
+                    <div class="book-info-area">
+                        <div>
+                            <h3 class="book-title">{{this.title}}</h3>
+                            <p>Author: {{this.author}}</p>
+                        </div>
+                        <!-- BOOKSHELF SORTING FORM -->
+                        <div>
+                        <form action="/add-to-bookshelf" class="bookshelf-select" method="POST">
+                            <input type="hidden" name="book_id" value="{{this.id}}">
+                            
+                            <select name="bookshelf" required>
+                                <option value="want_to_read">Want to read</option>
+                                <option value="currently_reading">Currently reading</option>
+                                <option value="read">Read</option>
+                            </select>
+                            
+                            <button type="submit">Add to shelf</button>
+                        </form>
+                        <form action="/remove-from-bookshelf" class="bookshelf-remove" method="POST">
+                            <input type="hidden" name="book_id" value="{{this.id}}">
+                            <button type="submit" class="">Remove</button>
+                        </form>
+                        </div>
+                    </div>
+                </li>
                 {{/each}}
             </ul>
             </div>
             {{/if}}
 
-            {{#if books.read.length}}
+            <!-- READ -->
+            {{#if booksByShelf.read.length}}
             <div class="shelf">
             <h2>Read: </h2>
             <ul>
-                {{#each books.read}}
-                    {{> bookcard}}
+                {{#each booksByShelf.read}}
+                    <li class="book-card">
+                    <div class="book-cover-area">
+                        {{#if this.cover}}
+                            <img src="{{this.cover}}" class="book-cover" alt="{{this.title}}" />
+                        {{else}}
+                            <img src="/images/cover_unavailable.webp" alt="Book cover unavailable." />
+                        {{/if}}
+                    </div>
+                    
+                    <div class="book-info-area">
+                        <div>
+                            <h3 class="book-title">{{this.title}}</h3>
+                            <p>Author: {{this.author}}</p>
+                        </div>
+                        <!-- BOOKSHELF SORTING FORM -->
+                        <div>
+                        <form action="/add-to-bookshelf" class="bookshelf-select" method="POST">
+                            <input type="hidden" name="book_id" value="{{this.id}}">
+                            
+                            <select name="bookshelf" required>
+                                <option value="want_to_read">Want to read</option>
+                                <option value="currently_reading">Currently reading</option>
+                                <option value="read">Read</option>
+                            </select>
+                            
+                            <button type="submit">Add to shelf</button>
+                        </form>
+                        <form action="/remove-from-bookshelf" class="bookshelf-remove" method="POST">
+                            <input type="hidden" name="book_id" value="{{this.id}}">
+                            <button type="submit" class="">Remove</button>
+                        </form>
+                        </div>
+                    </div>
+                </li>
                 {{/each}}
             </ul>
             </div>

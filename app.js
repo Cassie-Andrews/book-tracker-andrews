@@ -4,10 +4,6 @@ const exphbs = require("express-handlebars");
 const session = require("express-session");
 const MySQLStore = require("express-mysql-session")(session);
 const db = require("./config/connection");
-const path = require('path');
-const hbs = exphbs.create({
-  partialsDir: path.join(__dirname, 'views', 'partials')
-})
 
 
 const routes = require("./routes");
@@ -21,6 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 const sessionStore = new MySQLStore({
   createDatabaseTable: true
 }, db);
+
 app.use(
   session({
     key: "session_cookie",

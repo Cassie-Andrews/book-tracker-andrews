@@ -71,14 +71,20 @@ router.get("/private", checkAuth, async (req, res) => {
     }
 
     const bookshelves = await userBookController.getBooksByShelf(userId);
-    console.log("Bookshelves for", userId, "include: ", bookshelves)
+    console.log("Bookshelves for", userId, "include: ", bookshelves);
+    
+    const booksByShelf = {
+      want_to_read: bookshelves.wantToRead,
+      currently_reading: bookshelves.currentlyReading,
+      read: bookshelves.read,
+    };
 
     // render private page w/ book results
     res.render("private", { 
         isLoggedIn,
         query,
         books: searchResults,
-        ...bookshelves
+        booksByShelf
      });
 
   } catch(err) {

@@ -41,6 +41,7 @@ router.get("/search", async (req, res) => {
 
 // USER BOOKSHELF ROUTES
 
+// add to shelf
 router.post('/add-to-bookshelf', checkAuth, async (req, res) => {
     const user_id = req.session.userId;
     const { book_id, bookshelf } = req.body;
@@ -80,5 +81,60 @@ router.post('/add-to-bookshelf', checkAuth, async (req, res) => {
         res.status(500).send('Server error')
     }
 })
+
+// remove from shelf
+router.post('/remove-from-bookshelf', checkAuth, async (req, res) => {
+    const userId = req.session.userId
+    const { book_id } = req.body
+
+    if (!userId || !book_id) {
+        return res.status(400).send('Unable to delete, insufficient information');
+    }
+
+    try {
+        await db.query(
+            'DELETE FROM user_books WHERE users_id = ? AND books_id = ?',
+            [userId, book_id]
+        );
+
+        res.redirect('/private');
+    } catch(err) {
+        console.error('Error removing book', err.message);
+        res.status(500).send('Error removing book')
+    }
+})
+
+
+// /PRIVATE - DISPLAY BOOKSHELVES
+router.get('/private', checkAuth, async (req, res) => {
+    const user_id = req.session.userId;
+
+    try {
+        const [userBooks] = await db.query(
+            `SELECT user_books.id, user_books.bookshelf, books.id AS book_id, books.title, books.author, books.cover FROM user_books JOIN books ON user_books.books_id = books.id WHERE user_books.users_id = ?`,
+            [user_id]
+        );
+
+        const booksByShelf = {
+            currently_reading: [],
+            want_to_read: [],
+            read: []
+        };
+
+        userBooks.forEach(book => {
+            booksByShelf[book.bookshelf].push(book);
+        });
+
+        res.render ('/private', {
+            isLoggedIn: req.session.isLoggedIn,
+            booksByShelf
+        });
+
+    } catch (err) {
+        console.log("Error fetching user bookshelf data:", err);
+        res.status(500).send("Error fetching bookshelf data.")
+    }
+});
+
 
 module.exports = router;

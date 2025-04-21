@@ -28,5 +28,8 @@ CREATE TABLE user_books (
     ON DELETE CASCADE,
   FOREIGN KEY (books_id) 
     REFERENCES books(id) 
+    ON DELETE CASCADE,
+  FOREIGN KEY (books_ol_id) 
+    REFERENCES books(ol_id) 
     ON DELETE CASCADE
 );

@@ -19,12 +19,15 @@ async function checkPassword(plain, hash) {
 async function create(username, password) {
   const hashedPass = await bcrypt.hash(password, 10);
 
-  await db.query(
-    `INSERT INTO users (username, password) VALUES (?, ?)`, 
+  const [result] = await db.query(
+    `INSERT INTO users (username, password) VALUES (?, ?)`,
     [username, hashedPass]
-  );
+  )
 
-  return findByUsername(username);
+  return {
+    id: result.insertId,
+    username
+  };
 }
 
 

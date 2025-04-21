@@ -1,6 +1,7 @@
 const userModel = require("../models/userModel");
 const auth = require("../controllers/auth");
 
+
 async function create(req, res) {
   try {
     const { username, password } = req.body;
@@ -10,12 +11,15 @@ async function create(req, res) {
 
     const user = await userModel.create(username, password);
 
-    if (!user) return res.redirect("/signup?error=error creating new user");
+    if (!user || !user.id) {
+      return res.redirect("/signup?error=error creating new user");
+    }
 
     req.session.isLoggedIn = true;
     req.session.userId = user.id;
 
     req.session.save(() => res.redirect("/"));
+    
   } catch (err) {
     console.log(err);
     return res.redirect(`/signup?error=${err.message}`);
