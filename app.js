@@ -3,16 +3,18 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const session = require("express-session");
 const MySQLStore = require("express-mysql-session")(session);
-const connection = require("./config/connection");
+const db = require("./config/connection");
+
 const apiRoutes = require("./routes/apiRoutes");
 const htmlRoutes = require("./routes/htmlRoutes");
-const bookshelfRoutes = require("./routes/bookshelfRoutes");
 const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const sessionStore = new MySQLStore({
   createDatabaseTable: true
-}, connection);
-
+}, db);
 app.use(
   session({
     key: "session_cookie",
@@ -30,11 +32,9 @@ app.use(
 app.engine("handlebars", exphbs.engine());
 app.set("view engine", "handlebars");
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./public"));
 
+app.use("/", htmlRoutes);
 app.use("/api", apiRoutes);
-app.use("/", htmlRoutes, bookshelfRoutes);
 
 module.exports = app;

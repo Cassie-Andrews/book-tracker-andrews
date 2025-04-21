@@ -124,11 +124,5 @@ router.get("/search", checkAuth, async (req, res) => {
 });
 
 
-/* BOOKSHELF SORT FORM */
-const bookshelfRoutes = require('./bookshelfRoutes')
-
-router.use("/", bookshelfRoutes)
-
-
 
 module.exports = router;
