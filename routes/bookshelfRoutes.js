@@ -1,13 +1,20 @@
 const router = require("express").Router();
 const db = require('../config/connection');
+const checkAuth = require("../middleware/auth");
 
 // POST - add book to bookshelf
-router.post('/add-to-bookshelf', async (req, res) => {
-    const { user_id, book_id, bookshelf } = req.body;
+router.post('/add-to-bookshelf', checkAuth, async (req, res) => {
+    const { user_id , book_id, bookshelf } = req.body;
 
     if (!user_id || !book_id || !bookshelf) {
         return res.status(400).send('Missing required fields')
     }
+
+    const validBookshelf = ['want_to_read', 'currently_reading', 'read']
+    if (!validBookshelf.includes(bookshelf)) {
+        return res.status(400).send('Invalid bookshelf value');
+    }
+
 
     try {
         const [existing] = await db.query(
@@ -27,7 +34,7 @@ router.post('/add-to-bookshelf', async (req, res) => {
             )
         }
 
-        res.redirect('back');
+        res.redirect('/private'); // maybe '/back'
 
     } catch(err) {
         console.error('Error adding book to shelf', err.message);

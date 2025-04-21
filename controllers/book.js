@@ -12,7 +12,12 @@ async function searchAndInsertBooks(query) {
 
     //loop through each book
     for (const book of booksFromAPI) {
-        const { title = "Untitled", author = "Unknown", ol_id = null, cover = null } = book;
+        const { 
+            title = "Untitled", 
+            author = "Unknown", 
+            ol_id = null, 
+            cover = null 
+        } = book;
             
         console.log("Processing:", { title, author, cover, ol_id })
 
@@ -24,7 +29,7 @@ async function searchAndInsertBooks(query) {
                 existingBook = await bookModel.getBookByOlId(ol_id)
             }
 
-            if (!existingBook) {
+            if (!existingBook && title) {
                 existingBook = await bookModel.getBookByTitle(title)
             }
 
@@ -33,9 +38,12 @@ async function searchAndInsertBooks(query) {
                 results.push(existingBook)
             } else {
                 const insertId = await bookModel.insertBook(title, author, cover, ol_id)
-                const newBook = { id: insertId, title, author, cover };
+                const newBook = { id: insertId, title, author, cover, ol_id};
 
+                inserted.push(newBook);
                 results.push(newBook);
+
+                console.log(`Inserted new book: ${title}`)
             }
             
         } catch (err) {
@@ -43,7 +51,7 @@ async function searchAndInsertBooks(query) {
         } 
     }
 
-    console.log("Inserted/found:", inserted);
+    console.log("Inserted/found:", results.map(b=> `${b.title} (ID: ${b.id})`));
     return results;
 }
 

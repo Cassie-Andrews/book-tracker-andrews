@@ -19,7 +19,7 @@ async function login(req, res) {
     if (!passwordMatches)
       return res.redirect("/login?error=username or password is incorrect");
 
-    console.log("User ID:", user.id)
+    console.log("User returned from DB:", user);
     
     req.session.isLoggedIn = true;
     req.session.userId = user.id;
@@ -49,7 +49,7 @@ async function signup(req, res) {
     const newUser = await userModel.create(username, password)
 
     req.session.isLoggedIn = true;
-    req.session.userId = newUser.id;
+    req.session.userId = user.id;
     req.session.save(() => res.redirect("/private"));
   } catch (err) {
     res.status(500).send(err.message);

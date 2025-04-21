@@ -5,10 +5,13 @@ const db = require('../config/connection')
 async function addToShelf(req, res) {
     // we need: book id, shelf "id", user id
     const { book_id, bookshelf } = req.body;
+    console.log("Received data:", req.body);
+
     const user_id = req.session.userId;
+    console.log("User ID from session:", user_id);
 
     if(!user_id || !book_id || !bookshelf) {
-        return res.status(400).send('Missing required fields')
+        return res.status(400).send('Missing required fields');
     }
 
     try {

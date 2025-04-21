@@ -22,14 +22,17 @@
                 </div>
                 <!-- BOOKSHELF SORTING FORM -->
                 <div>
-                <form class="bookshelf-select" action="/add-to-bookshelf" method="POST">
-                    <input type="hidden" name="book_id" value="{{this.id}}">
-                    <select name="bookshelf" required onchange="this.form.submit()">
-                        <option value="" disabled selected hidden>Add to a bookshelf</option>
+                <form action="/add-to-bookshelf" class="bookshelf-select" method="POST">
+                    <input type="hidden" name="bookId" value="{{this.id}}">
+                    <input type="hidden" name="userId" value="{{session.userId}}">
+
+                    <select name="bookshelf" required>
                         <option value="want_to_read">Want to read</option>
                         <option value="currently_reading">Currently reading</option>
                         <option value="read">Read</option>
                     </select>
+                    
+                    <button type="submit">Add to shelf</button>
                 </form>
                 </div>
             </div>

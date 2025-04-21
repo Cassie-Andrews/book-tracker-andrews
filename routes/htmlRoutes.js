@@ -57,6 +57,7 @@ router.get("/private", checkAuth, async (req, res) => {
   const userId = req.session.userId;
   const isLoggedIn = req.session.isLoggedIn;
 
+
   try {
     let searchResults = [];
     // get book data from user_books table
@@ -120,20 +121,12 @@ router.get("/search", checkAuth, async (req, res) => {
     res.status(500).send("Error loading /search")
   }
 
-  /*  
-  try {
-    const books = await searchAndInsertBooks(query)
-    // renders index page with results
-    res.render("index", { books, isLoggedIn: req.session.isLoggedIn });
-  } catch (err) {
-    res.status(500).send("Error fetching search results: " + err.message)
-  } 
-  */
 });
 
 
 /* BOOKSHELF SORT FORM */
 const bookshelfRoutes = require('./bookshelfRoutes')
+
 router.use("/", bookshelfRoutes)
 
 
