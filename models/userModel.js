@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const db = require("../config/connection");
+const db = require("../connection");
 const checkAuth = require('../middleware/auth');
 
 async function findByUsername(username) {

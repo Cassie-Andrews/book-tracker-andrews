@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const db = require("../config/connection");
+const db = require("../connection");
 const checkAuth = require("../middleware/auth");
 
 const controllers = require("../controllers");

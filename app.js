@@ -3,7 +3,7 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const session = require("express-session");
 const MySQLStore = require("express-mysql-session")(session);
-const db = require("./config/connection");
+const db = require("./connection");
 
 
 const routes = require("./routes");

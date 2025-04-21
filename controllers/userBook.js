@@ -1,4 +1,4 @@
-const db = require('../config/connection')
+const db = require('../connection')
 
 
 // add a book to a shelf

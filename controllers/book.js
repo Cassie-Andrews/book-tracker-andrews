@@ -1,7 +1,7 @@
 const bookModel = require('../models/bookModel')
 const fetch = require('node-fetch')
 const { fetchOpenLibraryData } = require('../api/bookApi');
-const db = require('../config/connection');
+const db = require('../connection');
 // const e = require('express');
 
 
