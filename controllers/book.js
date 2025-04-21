@@ -38,14 +38,14 @@ async function addToBookshelf(userId, bookId, bookshelf) {
 
 
 // remove book from bookshelf
-async function removeFromBookshelf(userId, bookId) {
-    if (!userId || !bookId) {
+async function removeFromBookshelf(userId, book_id) {
+    if (!userId || !book_id) {
         throw new Error('Unable to delete, insufficient information');
     }
 
     await db.query(
         'DELETE FROM user_books WHERE users_id = ? AND books_id = ?',
-        [userId, bookId]
+        [userId, book_id]
     );    
 };
 

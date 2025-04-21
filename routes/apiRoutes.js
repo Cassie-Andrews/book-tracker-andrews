@@ -41,7 +41,7 @@ router.post('/add-to-bookshelf', checkAuth, async (req, res) => {
 
         await addToBookshelf(userId, book.id, bookshelf);
 
-        res.redirect(req.get('Referer' || '/private')); // maybe '/back'
+        res.redirect(req.get('Referer' || '/private')); // maybe '/back'?
     } catch(err) {
         console.error('Error adding book to shelf', err.message);
         res.status(500).send('Server error');
@@ -52,11 +52,15 @@ router.post('/add-to-bookshelf', checkAuth, async (req, res) => {
 // remove from shelf
 router.post('/remove-from-bookshelf', checkAuth, async (req, res) => {
     const userId = req.session.userId;
-    const { bookId } = req.body;
+    const { book_id } = req.body;
+
+    if (!userId || !book_id) {
+        return res.status(400).send('Missing book ID');
+    }
 
     try {
-        await removeFromBookshelf(userId, bookId);
-        res.redirect('/private');        
+        await removeFromBookshelf(userId, book_id);
+        res.redirect(req.get('Referer' || '/private'));     
     } catch(err) {
         console.error('Error removing book', err.message);
         res.status(500).send('Error removing book')
