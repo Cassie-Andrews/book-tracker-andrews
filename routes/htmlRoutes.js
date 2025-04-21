@@ -50,6 +50,11 @@ router.get("/signup", async (req, res) => {
 
 
 
+/* LOGOUT ROUTE */
+
+router.get("/logout", auth.logout)
+
+
 
 /* PRIVATE ROUTE */
 

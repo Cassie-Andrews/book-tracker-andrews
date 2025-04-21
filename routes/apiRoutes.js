@@ -54,6 +54,9 @@ router.post('/remove-from-bookshelf', checkAuth, async (req, res) => {
     const userId = req.session.userId;
     const { book_id } = req.body;
 
+    console.log("User ID:", userId)
+    console.log("Book ID:", book_id);
+
     if (!userId || !book_id) {
         return res.status(400).send('Missing book ID');
     }

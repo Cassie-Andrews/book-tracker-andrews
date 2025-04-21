@@ -64,7 +64,14 @@ async function signup(req, res) {
 
 
 async function logout(req, res) {
-  req.session.destroy(() => res.redirect("/"));
+  req.session.destroy((err) => {
+    if (err) {
+      console.error("Error logging out:", err);
+      return res.status(500).send("Error logging out");
+    }
+
+    res.redirect("/")
+  })
 }
 
 
