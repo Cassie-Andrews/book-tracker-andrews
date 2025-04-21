@@ -23,8 +23,8 @@
                 <!-- BOOKSHELF SORTING FORM -->
                 <div>
                 <form action="/add-to-bookshelf" class="bookshelf-select" method="POST">
-                    <input type="hidden" name="bookId" value="{{this.id}}">
-                    <input type="hidden" name="userId" value="{{session.userId}}">
+                    <input type="hidden" name="book_id" value="{{this.id}}">
+                    <input type="hidden" name="user_id" value="{{session.userId}}">
 
                     <select name="bookshelf" required>
                         <option value="want_to_read">Want to read</option>
