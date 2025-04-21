@@ -19,11 +19,13 @@ async function login(req, res) {
     if (!passwordMatches)
       return res.redirect("/login?error=username or password is incorrect");
 
-    console.log("User returned from DB:", user);
     
     req.session.isLoggedIn = true;
     req.session.userId = user.id;
-    req.session.save(() => res.redirect("/private"));
+    req.session.save(() => {
+      console.log("Session userId:", req.session.userId);
+      res.redirect("/private");
+    });
   } catch (err) {
     res.status(500).send(err.message);
   }
@@ -55,7 +57,6 @@ async function signup(req, res) {
     res.status(500).send(err.message);
   }
 }
-
 
 
 

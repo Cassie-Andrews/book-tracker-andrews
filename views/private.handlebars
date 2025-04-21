@@ -1,122 +1,46 @@
 {{> header}}
 <main class="profile">
 
-
-<div class="profile-content">
-  <h1>Your library</h1>
-  <p>This is where your bookshelves will be. You should only be able to see this page if logged in.</p>
-
-  
-  <!-- BOOKSHELVES -->
-  <div class="bookshelves">
-
-    <div class="shelf">
-      <h2>Currently Reading: </h2>
-      <ul>
-        {{#each currently_reading}}
-        <li class="book-card">
-          <div class="book-cover-area">
-                {{#if this.cover}}
-                    <img src="{{this.cover}}" class="book-cover" alt="{{this.title}}" />
-                {{else}}
-                    <img src="/images/cover_unavailable.webp" alt="Book cover unavailable." />
-                {{/if}}
+    <div class="profile-content">
+        <h1>Your library</h1>
+        <p>This is where your bookshelves will be. You should only be able to see this page if logged in.</p>
+        
+        <!-- BOOKSHELVES -->
+        <div class="bookshelves">
+            {{#if books.currently_reading.length}}
+            <div class="shelf">
+            <h2>Currently Reading: </h2>
+            <ul>
+                {{#each books.currently_reading}}
+                    {{> bookcard}}
+                {{/each}}
+            </ul>
             </div>
-            <div class="book-info-area">
-                <div>
-                    <h3 class="book-title">{{this.title}}</h3>
-                <p>Author: {{this.author}}</p>
-                </div>
-                <!-- BOOKSHELF SORTING FORM -->
-                <div>
-                <form class="bookshelf-select" action="/add-to-bookshelf" method="POST">
-                    <input type="hidden" name="book_id" value="{{this.id}}">
-                    <select name="bookshelf" required onchange="this.form.submit()">
-                        <option value="" disabled selected hidden>Add to a different bookshelf</option>
-                        <option value="want_to_read">Want to read</option>
-                        <option value="currently_reading">Currently reading</option>
-                        <option value="read">Read</option>
-                    </select>
-                </form>
-                </div>
+            {{/if}}
+
+            {{#if books.want_to_read.length}}
+            <div class="shelf">
+            <h2>Want to read: </h2>
+            <ul>
+                {{#each books.want_to_read}}
+                    {{> bookcard}}
+                {{/each}}
+            </ul>
             </div>
-        </li>
-        {{/each}}
-      </ul>
+            {{/if}}
+
+            {{#if books.read.length}}
+            <div class="shelf">
+            <h2>Read: </h2>
+            <ul>
+                {{#each books.read}}
+                    {{> bookcard}}
+                {{/each}}
+            </ul>
+            </div>
+            {{/if}}
+
+        </div>
     </div>
-
-    <div class="shelf">
-      <h2>Want to Read: </h2>
-      <ul>
-        {{#each want_to_read}}
-          <div class="book-cover-area">
-                {{#if this.cover}}
-                    <img src="{{this.cover}}" class="book-cover" alt="{{this.title}}" />
-                {{else}}
-                    <img src="/images/cover_unavailable.webp" alt="Book cover unavailable." />
-                {{/if}}
-            </div>
-            <div class="book-info-area">
-                <div>
-                    <h3 class="book-title">{{this.title}}</h3>
-                <p>Author: {{this.author}}</p>
-                </div>
-                <!-- BOOKSHELF SORTING FORM -->
-                <div>
-                <form class="bookshelf-select" action="/add-to-bookshelf" method="POST">
-                    <input type="hidden" name="book_id" value="{{this.id}}">
-                    <select name="bookshelf" required onchange="this.form.submit()">
-                        <option value="" disabled selected hidden>Add to a different bookshelf</option>
-                        <option value="want_to_read">Want to read</option>
-                        <option value="currently_reading">Currently reading</option>
-                        <option value="read">Read</option>
-                    </select>
-                </form>
-                </div>
-            </div>
-        </li>
-        {{/each}}
-      </ul>
-    </div>
-
-    <div class="shelf">
-      <h2>Read: </h2>
-      <ul>
-        {{#each read}}
-        <li class="book-card">
-          <div class="book-cover-area">
-                {{#if this.cover}}
-                    <img src="{{this.cover}}" class="book-cover" alt="{{this.title}}" />
-                {{else}}
-                    <img src="/images/cover_unavailable.webp" alt="Book cover unavailable." />
-                {{/if}}
-            </div>
-            <div class="book-info-area">
-                <div>
-                    <h3 class="book-title">{{this.title}}</h3>
-                <p>Author: {{this.author}}</p>
-                </div>
-                <!-- BOOKSHELF SORTING FORM -->
-                <div>
-                <form class="bookshelf-select" action="/add-to-bookshelf" method="POST">
-                    <input type="hidden" name="book_id" value="{{this.id}}" onchange="this.form.submit()">
-                    <select name="bookshelf" required onchange="this.form.submit()">
-                        <option value="" disabled selected hidden>Add to a different bookshelf</option>
-                        <option value="want_to_read">Want to read</option>
-                        <option value="currently_reading">Currently reading</option>
-                        <option value="read">Read</option>
-                    </select>
-                </form>
-                </div>
-            </div>
-        </li>
-        {{/each}}
-      </ul>
-    </div>
-
-  </div>
-
-</div>
-
 </main>
 {{> footer}}

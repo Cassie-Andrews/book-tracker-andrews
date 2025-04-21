@@ -42,7 +42,9 @@ router.get("/search", async (req, res) => {
 // USER BOOKSHELF ROUTES
 
 router.post('/add-to-bookshelf', checkAuth, async (req, res) => {
-    const { user_id , book_id, bookshelf } = req.body;
+    const user_id = req.session.userId;
+    const { book_id, bookshelf } = req.body;
+    console.log(user_id, req.body);
 
     if (!user_id || !book_id || !bookshelf) {
         return res.status(400).send('Missing required fields');

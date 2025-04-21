@@ -11,7 +11,8 @@ const checkAuth = require("../middleware/auth");
 /* INDEX aka HOMEPAGE ROUTE */
 
 // loads homepage, index.handlebars
-router.get("/", async ({ session: { isLoggedIn } }, res) => {
+router.get("/", async (req, res) => { 
+  const { isLoggedIn } = req.session || {};
   // when logged in, gets all books then displays them
   try {
     const books = await book.searchAndInsertBooks();
@@ -29,7 +30,9 @@ router.get("/", async ({ session: { isLoggedIn } }, res) => {
 // renders login page
 router.get("/login", async (req, res) => {
   // if user is already logged in, redirect to profile
-  if (req.session.isLoggedIn) return res.redirect("/private");
+  if (req.session && req.session.isLoggedIn) {
+    return res.redirect("/private");
+  }
   // error handling
   res.render("login", { error: req.query.error });
 });
@@ -111,6 +114,7 @@ router.get("/search", checkAuth, async (req, res) => {
 
     res.render("search", { 
       isLoggedIn,
+      userId,
       query,
       books: searchResults,
     });

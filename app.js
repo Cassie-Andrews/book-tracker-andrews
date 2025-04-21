@@ -5,17 +5,14 @@ const session = require("express-session");
 const MySQLStore = require("express-mysql-session")(session);
 const db = require("./config/connection");
 
+
 const routes = require("./routes");
 const app = express();
 
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/", routes);
 
-app.use(express.static("./public"));
-
-app.engine("handlebars", exphbs.engine());
-app.set("view engine", "handlebars");
 
 const sessionStore = new MySQLStore({
   createDatabaseTable: true
@@ -33,6 +30,14 @@ app.use(
     },
   })
 );
+
+
+app.engine("handlebars", exphbs.engine());
+app.set("view engine", "handlebars");
+
+app.use(express.static("./public"));
+
+app.use("/", routes);
 
 
 module.exports = app;

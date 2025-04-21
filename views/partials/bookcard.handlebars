@@ -1,0 +1,29 @@
+<li class="book-card">
+    <div class="book-cover-area">
+        {{#if this.cover}}
+            <img src="{{this.cover}}" class="book-cover" alt="{{this.title}}" />
+        {{else}}
+            <img src="/images/cover_unavailable.webp" alt="Book cover unavailable." />
+        {{/if}}
+    </div>
+    <div class="book-info-area">
+        <div>
+            <h3 class="book-title">{{this.title}}</h3>
+            <p>Author: {{this.author}}</p>
+        </div>
+        <!-- BOOKSHELF SORTING FORM -->
+        <div>
+        <form action="/add-to-bookshelf" class="bookshelf-select" method="POST">
+            <input type="hidden" name="book_id" value="{{this.id}}">
+            
+            <select name="bookshelf" required>
+                <option value="want_to_read">Want to read</option>
+                <option value="currently_reading">Currently reading</option>
+                <option value="read">Read</option>
+            </select>
+            
+            <button type="submit">Add to shelf</button>
+        </form>
+        </div>
+    </div>
+</li>
